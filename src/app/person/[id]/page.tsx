@@ -26,19 +26,27 @@ export default async function Person({ params }: { params: Promise<{ id: string 
             
             <h2 className={styles.subtitle}>{person.name}</h2>
             <h3>{person.hobbies || 'No hobbies listed'}</h3>
-            <ul className={styles.giftList}>
-                {person.gifts?.map((gift: any) => (
-                <><li key={gift.id} className={styles.giftLink}>
-                        {gift.name} - {gift.status}
-                    </li>
-                        <DeleteButton 
-                            itemName={gift.name}
-                            itemType="gift"
-                            itemId={gift.id}
-                        />
-                    </>
-                ))}
-            </ul>
+
+            {person.gifts && person.gifts.length > 0 ? (
+                <ul className={styles.giftList}>
+                    {person.gifts?.map((gift: any) => (
+                        <li key={gift.id} className={styles.giftListItem}>
+                            <span className={styles.giftLink}>
+                                {gift.name} - {gift.status}
+                            </span>
+                            <DeleteButton 
+                                itemName={gift.name}
+                                itemType="gift"
+                                itemId={gift.id}
+                                personId={person.id}
+                            />
+                        </li>
+                    ))}
+                </ul>
+            ) : (
+                <p className={styles.noGifts}>No gifts yet</p>
+            )
+            }
             <h1>
                 <Link href={`/`} className={styles.backLink}>
                     Back to Home
