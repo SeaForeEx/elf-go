@@ -21,20 +21,26 @@ export default async function Home() {
         <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
         
         <h2 className={styles.subtitle}>People</h2>
-        <ul className={styles.peopleList}>
-            {people?.map((person) => (
-            <li key={person.id} className={styles.personListItem}>
-                <Link href={`/person/${person.id}`} className={styles.personLink}>
-                {person.name}
-                </Link>
-                <DeleteButton 
-                    itemName={person.name}
-                    itemType="person"
-                    itemId={person.id}
-                />
-            </li>
-            ))}
-        </ul>
+
+        {people && people.length > 0 ? (
+            <ul className={styles.peopleList}>
+                {people?.map((person) => (
+                <li key={person.id} className={styles.personListItem}>
+                    <Link href={`/person/${person.id}`} className={styles.personLink}>
+                    {person.name}
+                    </Link>
+                    <DeleteButton 
+                        itemName={person.name}
+                        itemType="person"
+                        itemId={person.id}
+                    />
+                </li>
+                ))}
+            </ul>
+        ) : (
+            <p className={styles.noPeople}>No people yet</p>
+        )
+        }
         </div>
     )
 }
