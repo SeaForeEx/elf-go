@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
+import EditButton from '@/components/EditButton/EditButton'
 
 export default async function Person({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -24,7 +25,10 @@ export default async function Person({ params }: { params: Promise<{ id: string 
         <div className={styles.container}>
             <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
             
-            <h2 className={styles.subtitle}>{person.name}</h2>
+            <h2 className={styles.subtitle}>
+                {person.name}
+                <EditButton personId={person.id} />
+            </h2>
             <h3>{person.hobbies || 'No hobbies listed'}</h3>
 
             {person.gifts && person.gifts.length > 0 ? (
@@ -34,6 +38,7 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                             <span className={styles.giftLink}>
                                 {gift.name} - {gift.status}
                             </span>
+                            <EditButton personId={person.id} />
                             <DeleteButton 
                                 itemName={gift.name}
                                 itemType="gift"

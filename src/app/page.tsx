@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
-import { deletePerson } from './actions'
+import EditButton from '@/components/EditButton/EditButton'
 
 export default async function Home() {
     const supabase = await createClient()
@@ -29,6 +29,7 @@ export default async function Home() {
                     <Link href={`/person/${person.id}`} className={styles.personLink}>
                     {person.name}
                     </Link>
+                    <EditButton personId={person.id} />
                     <DeleteButton 
                         itemName={person.name}
                         itemType="person"

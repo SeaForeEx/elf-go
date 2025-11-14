@@ -1,0 +1,41 @@
+import { updatePerson } from "@/app/actions"
+import PersonForm from "@/components/PersonForm/PersonForm"
+import { createClient } from "@/lib/supabase/server"
+import { redirect } from "next/navigation"
+
+export default async function EditPerson({
+    params
+}: {
+    params: Promise<{ id: string }>
+}) {
+    const { id } = await params
+    const supabase = await createClient()
+
+    const { data: person } = await supabase 
+        .from('people')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+    if (!person) {
+        return <div>Person not found</div>
+    }
+
+    async function handleSubmit(data: { name: string, hobbies: string}) {
+        'use server'
+        await updatePerson(id, data)
+        redirect(`/person/${id}`)
+    }
+
+    return (
+        <div>
+            <h1>
+                Edit Person
+            </h1>
+            <PersonForm 
+                initialData={person}
+                onSubmit={handleSubmit}
+            />
+        </div>
+    )
+}
