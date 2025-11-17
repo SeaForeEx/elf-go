@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
+import { deletePerson } from './actions'
 
 export default async function Home() {
     const supabase = await createClient()
@@ -36,7 +37,7 @@ export default async function Home() {
                         personId={person.id} />
                     <DeleteButton 
                         itemName={person.name}
-                        itemType="person"
+                        itemType='person'
                         personId={person.id}
                     />
                 </li>

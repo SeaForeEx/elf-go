@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import Link from "next/link"
 import EditButton from "@/components/EditButton/EditButton"
 import DeleteButton from "@/components/DeleteButton/DeleteButton"
+import { deleteGift } from "@/app/actions"
 
 export default async function Gift({ params }: { params: Promise<{ id: string }>}) {
     const { id } = await params
@@ -30,7 +31,6 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
                     itemName={gift.name}
                     itemType='gift'
                     giftId={gift.id}
-                    personId={gift.person_id}
                 />
             </h2>
             <h3>

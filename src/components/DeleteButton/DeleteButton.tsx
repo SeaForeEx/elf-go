@@ -47,7 +47,7 @@ export default function DeleteButton({
         <button
             onClick={handleDelete}
             disabled={isDeleting}
-            className={`${styles.deleteButton}`}
+            className={styles.deleteButton}
         >
             {isDeleting ? 'Deleting...' : 'Delete'}
         </button>

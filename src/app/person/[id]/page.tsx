@@ -4,6 +4,7 @@ import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
+import { deleteGift, deletePerson } from '@/app/actions'
 
 export default async function Person({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -36,7 +37,7 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                 />
                 <DeleteButton 
                     itemName={person.name}
-                    itemType="person"
+                    itemType='person'
                     personId={person.id}
                 />
             </h2>
@@ -56,7 +57,7 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                             />
                             <DeleteButton 
                                 itemName={gift.name}
-                                itemType="gift"
+                                itemType='gift'
                                 giftId={gift.id}
                                 personId={person.id}
                             />
