@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
+import CreateButton from '@/components/CreateButton/CreateButton'
 
 export default async function Person({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -20,6 +21,8 @@ export default async function Person({ params }: { params: Promise<{ id: string 
     if (error || !person) {
         return <div>Person not found</div>
     }
+
+    console.log("Gifts: ", person.gifts);
 
     return (
         <div className={styles.container}>
@@ -64,6 +67,10 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                 <p className={styles.noGifts}>No gifts yet</p>
             )
             }
+            <CreateButton 
+                itemType={'gift'}
+                personId={person.id} 
+            />
             <h1>
                 <Link href={`/`} className={styles.backLink}>
                     Back to Home

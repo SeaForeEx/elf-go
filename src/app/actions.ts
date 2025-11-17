@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation";
 
+// PERSON ACTIONS
 
 export async function createPerson(data: { name: string; hobbies: string }) {
     const supabase = await createClient()
@@ -64,6 +65,27 @@ export async function deletePerson(personId: string) {
     redirect('/')
 }
 
+// GIFT ACTIONS
+
+export async function createGift(
+    personId: string,
+    data: { name: string; status: string }
+) {
+    const supabase = await createClient()
+
+    const { error } = await supabase
+        .from('gifts')
+        .insert({
+            person_id: personId,
+            name: data.name,
+            status: data.status
+        })
+
+    if (error) {
+        return { success: false, error: error.message }
+    }
+}
+
 export async function updateGift(
     giftId: string,
     data: { name: string; status: string }
@@ -100,5 +122,6 @@ export async function deleteGift(giftId: string, personId?: string) {
     }
 
     revalidatePath(`/person/${personId}`)
-    redirect(`/person/${personId}`)
+    
+    return { success: true }
 }
