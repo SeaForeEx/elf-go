@@ -7,17 +7,15 @@ import styles from './DeleteButton.module.css'
 type DeleteButtonProps = {
     itemName: string
     itemType: 'person' | 'gift'
-    itemId: string
+    giftId?: string
     personId?: string
-    className?: string
 }
 
 export default function DeleteButton({
     itemName,
     itemType,
-    itemId,
+    giftId,
     personId,
-    className
 }: DeleteButtonProps) {
     const [isDeleting, setIsDeleting] = useState(false)
 
@@ -34,9 +32,9 @@ export default function DeleteButton({
 
         let result
         if (itemType === 'person') {
-            result = await deletePerson(itemId)
+            result = await deletePerson(personId!)
         } else {
-            result = await deleteGift(itemId, personId!)
+            result = await deleteGift(giftId!, personId!)
         }
 
         if (!result.success) {
@@ -49,7 +47,7 @@ export default function DeleteButton({
         <button
             onClick={handleDelete}
             disabled={isDeleting}
-            className={`${styles.deleteButton} ${className || ''}`}
+            className={`${styles.deleteButton}`}
         >
             {isDeleting ? 'Deleting...' : 'Delete'}
         </button>
