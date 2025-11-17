@@ -1,6 +1,6 @@
-.editButton {
+.createButton {
     padding: 8px 16px;
-    background-color: #0d6efd; /* Bootstrap blue */
+    background-color: #0fb84d; 
     color: white;
     border: none;
     border-radius: 5px;
@@ -9,11 +9,11 @@
     transition: background-color 0.2s;
 }
   
-.editButton:hover:not(:disabled) {
-    background-color: #0b5ed7; /* Darker blue */
+.createButton:hover:not(:disabled) {
+    background-color: #096b2b; 
 }
 
-.editButton:disabled {
+.createButton:disabled {
     background-color: #999;
     cursor: not-allowed;
 }

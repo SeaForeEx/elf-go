@@ -4,6 +4,25 @@ import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation";
 
+
+export async function createPerson(data: { name: string; hobbies: string }) {
+    const supabase = await createClient()
+    
+    const { error } = await supabase
+        .from('people')
+        .insert({
+            name: data.name,
+            hobbies: data.hobbies
+    })
+    
+    if (error) {
+        return { success: false, error: error.message }
+    }
+    
+    revalidatePath('/')
+    return { success: true }
+}
+
 export async function updatePerson(
     personId: string, 
     data: { name: string; hobbies: string }
@@ -12,12 +31,12 @@ export async function updatePerson(
     const supabase = await createClient()
     
     const { error } = await supabase
-    .from('people')
-    .update({
-        name: data.name,
-        hobbies: data.hobbies
-    })
-    .eq('id', personId)
+        .from('people')
+        .update({
+            name: data.name,
+            hobbies: data.hobbies
+        })
+        .eq('id', personId)
     
     if (error) {
         return { success: false, error: error.message }

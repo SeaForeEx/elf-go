@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
+import CreateButton from '@/components/CreateButton/CreateButton'
 
 export default async function Home() {
     const supabase = await createClient()
@@ -21,6 +22,7 @@ export default async function Home() {
         <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
         
         <h2 className={styles.subtitle}>People</h2>
+        <CreateButton itemType={'person'} />
 
         {people && people.length > 0 ? (
             <ul className={styles.peopleList}>
