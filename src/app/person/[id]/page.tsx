@@ -27,7 +27,15 @@ export default async function Person({ params }: { params: Promise<{ id: string 
             
             <h2 className={styles.subtitle}>
                 {person.name}
-                <EditButton personId={person.id} />
+                <EditButton 
+                    itemType='person'
+                    personId={person.id} 
+                />
+                <DeleteButton 
+                    itemName={person.name}
+                    itemType="person"
+                    personId={person.id}
+                />
             </h2>
             <h3>{person.hobbies || 'No hobbies listed'}</h3>
 
@@ -35,14 +43,18 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                 <ul className={styles.giftList}>
                     {person.gifts?.map((gift: any) => (
                         <li key={gift.id} className={styles.giftListItem}>
-                            <span className={styles.giftLink}>
+                            <Link href={`/gift/${gift.id}`} className={styles.giftLink}>
                                 {gift.name} - {gift.status}
-                            </span>
-                            <EditButton personId={person.id} />
+                            </Link>
+                            <EditButton 
+                                itemType='gift'
+                                personId={person.id}
+                                giftId={gift.id} 
+                            />
                             <DeleteButton 
                                 itemName={gift.name}
                                 itemType="gift"
-                                itemId={gift.id}
+                                giftId={gift.id}
                                 personId={person.id}
                             />
                         </li>

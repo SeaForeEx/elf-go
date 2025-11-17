@@ -4,16 +4,27 @@ import Link from 'next/link'
 import styles from './EditButton.module.css'
 
 type EditButtonProps = {
-  personId: string
+    itemType: 'person' | 'gift'
+    personId?: string
+    giftId?: string
 }
 
-export default function EditButton({ personId }: EditButtonProps) {
-  return (
-    <Link 
-      href={`/person/${personId}/edit`}
-      className={styles.editButton}
-    >
-      Edit
-    </Link>
-  )
+export default function EditButton({ 
+    itemType,
+    personId,
+    giftId 
+}: EditButtonProps) {
+
+    const editHref = itemType === 'person'
+        ? `/person/${personId}/edit`
+        : `/gift/${giftId}/edit`
+
+    return (
+        <Link 
+            href={editHref}
+            className={styles.editButton}
+        >
+            Edit
+        </Link>
+    )
 }

@@ -29,11 +29,13 @@ export default async function Home() {
                     <Link href={`/person/${person.id}`} className={styles.personLink}>
                     {person.name}
                     </Link>
-                    <EditButton personId={person.id} />
+                    <EditButton 
+                        itemType='person'
+                        personId={person.id} />
                     <DeleteButton 
                         itemName={person.name}
                         itemType="person"
-                        itemId={person.id}
+                        personId={person.id}
                     />
                 </li>
                 ))}
