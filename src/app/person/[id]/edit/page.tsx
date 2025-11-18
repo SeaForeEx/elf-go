@@ -2,6 +2,7 @@ import { updatePerson } from "@/app/actions"
 import PersonForm from "@/components/PersonForm/PersonForm"
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
+import styles from './page.module.css'
 
 export default async function EditPerson({
     params
@@ -28,8 +29,8 @@ export default async function EditPerson({
     }
 
     return (
-        <div>
-            <h1>
+        <div className={styles.container}>
+            <h1 className={styles.title}>
                 Edit Person
             </h1>
             <PersonForm 

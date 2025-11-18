@@ -2,6 +2,7 @@ import { updateGift } from "@/app/actions"
 import GiftForm from "@/components/GiftForm/GiftForm"
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
+import styles from './page.module.css'
 
 export default async function EditGift({
     params
@@ -24,13 +25,13 @@ export default async function EditGift({
     async function handleSubmit(data: { name: string, status: string}) {
         'use server'
         await updateGift(id, data)
-        redirect(`/person/${id}`)
+        redirect(`/gift/${id}`)
     }
 
     return (
-        <div>
-            <h1>
-                Edit Person
+        <div className={styles.container}>
+            <h1 className={styles.title}>
+                Edit Gift
             </h1>
             <GiftForm 
                 initialData={gift}
