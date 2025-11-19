@@ -6,43 +6,43 @@
     width: 100%;
     max-width: 500px;
     margin-bottom: 1.5rem;
-  }
+}
   
-  .field {
+.field {
     margin-bottom: 1.5rem;
-  }
+}
   
-  .field label {
+.field label {
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
     color: #374151;
     margin-bottom: 0.5rem;
-  }
+}
   
-  .field input,
-  .select {
+.field input,
+.select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #d1d5db;
     border-radius: 0.375rem;
     font-size: 1rem;
     transition: border-color 0.2s, box-shadow 0.2s;
-  }
+}
   
-  .field input:focus,
-  .select:focus {
+.field input:focus,
+.select:focus {
     outline: none;
     border-color: #16a34a;
     box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
-  }
+}
   
-  .select {
+.select {
     cursor: pointer;
     background-color: white;
-  }
+}
   
-  .form button[type="submit"] {
+.form button[type="submit"] {
     width: 100%;
     padding: 0.75rem 1.5rem;
     background-color: #16a34a;
@@ -53,18 +53,18 @@
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.2s;
-  }
+}
   
-  .form button[type="submit"]:hover {
+.form button[type="submit"]:hover {
     background-color: #15803d;
-  }
+}
   
-  .form button[type="submit"]:disabled {
+.form button[type="submit"]:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
+}
 
-  .backLink {
+.backLink {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     background-color: #16a34a;
@@ -74,8 +74,8 @@
     font-weight: 500;
     transition: background-color 0.2s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  .backLink:hover {
+.backLink:hover {
     background-color: #15803d;
-  }
+}
