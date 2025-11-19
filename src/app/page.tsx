@@ -4,10 +4,16 @@ import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
-import { deletePerson } from './actions'
+import { redirect } from 'next/navigation'
+import LogoutButton from '@/components/auth/LogoutButton/LogoutButton'
 
 export default async function Home() {
     const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+        redirect('/login')
+    }
   
     const { data: people, error } = await supabase
         .from('people')
@@ -21,6 +27,7 @@ export default async function Home() {
     return (
         <div className={styles.container}>
         <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
+        <LogoutButton />
         
         <h2 className={styles.subtitle}>People</h2>
         <CreateButton itemType={'person'} />
