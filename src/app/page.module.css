@@ -2,18 +2,21 @@
     min-height: 100vh;
     background: linear-gradient(to bottom right, #f0fdf4, #fef2f2);
     padding: 2rem;
-  }
+}
   
-  .title {
+.title {
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
     margin-bottom: 1.5rem;
     color: #16a34a;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  .subtitle {
+.subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 1.5rem;
     font-weight: 600;
     color: #374151;
@@ -21,18 +24,18 @@
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #16a34a;
-  }
+}
   
-  .peopleList {
+.peopleList {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-  }
+}
   
-  .personListItem {
+.personListItem {
     background-color: white;
     padding: 1rem 1.5rem;
     border-radius: 0.5rem;
@@ -41,27 +44,27 @@
     align-items: center;
     gap: 1rem;
     transition: transform 0.2s, box-shadow 0.2s;
-  }
+}
   
-  .personListItem:hover {
+.personListItem:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
+}
   
-  .personLink {
+.personLink {
     flex: 1;
     font-size: 1.125rem;
     font-weight: 500;
     color: #1f2937;
     text-decoration: none;
     transition: color 0.2s;
-  }
+}
   
-  .personLink:hover {
+.personLink:hover {
     color: #16a34a;
-  }
+}
   
-  .noPeople {
+.noPeople {
     text-align: center;
     color: #6b7280;
     font-size: 1rem;
@@ -69,4 +72,4 @@
     background-color: white;
     border-radius: 0.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
+}

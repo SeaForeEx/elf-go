@@ -52,7 +52,7 @@ export default function PersonForm({
                 </button>
             </form>
             <h1>
-                <Link href={`/`}>
+                <Link href={`/`} className={styles.backLink}>
                     Back to Home
                 </Link>
             </h1>

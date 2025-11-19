@@ -41,7 +41,13 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                     personId={person.id}
                 />
             </h2>
-            <h3>{person.hobbies || 'No hobbies listed'}</h3>
+            <h3>Hobbies: {' '}
+                {person.hobbies || 'No hobbies listed'}
+            </h3>
+
+            <h2 className={styles.subtitle}>
+                Gifts
+            </h2>
 
             {person.gifts && person.gifts.length > 0 ? (
                 <ul className={styles.giftList}>
