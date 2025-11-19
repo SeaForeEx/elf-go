@@ -102,8 +102,8 @@
     font-weight: 500;
     transition: background-color 0.2s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .backLink:hover {
+}
+
+.backLink:hover {
     background-color: #15803d;
-  }
+}

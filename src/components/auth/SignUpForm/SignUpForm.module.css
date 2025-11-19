@@ -3,58 +3,58 @@
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  .title {
+.title {
     font-size: 1.875rem;
     font-weight: bold;
     text-align: center;
     margin-bottom: 1.5rem;
     color: #16a34a;
-  }
+}
   
-  .form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
+}
   
-  .error {
+.error {
     background-color: #fef2f2;
     color: #dc2626;
     padding: 0.75rem;
     border-radius: 0.375rem;
     font-size: 0.875rem;
-  }
+}
   
-  .formGroup {
+.formGroup {
     display: flex;
     flex-direction: column;
-  }
+}
   
-  .label {
+.label {
     display: block;
     font-size: 0.875rem;
     font-weight: 500;
     color: #374151;
     margin-bottom: 0.25rem;
-  }
+}
   
-  .input {
+.input {
     width: 100%;
     padding: 0.5rem 0.75rem;
     border: 1px solid #d1d5db;
     border-radius: 0.375rem;
     font-size: 1rem;
-  }
+}
   
-  .input:focus {
+.input:focus {
     outline: none;
     border-color: #16a34a;
     box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
-  }
+}
   
-  .button {
+.button {
     width: 100%;
     background-color: #16a34a;
     color: white;
@@ -64,50 +64,50 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.2s;
-  }
+}
   
-  .button:hover {
+.button:hover {
     background-color: #15803d;
-  }
+}
   
-  .button:disabled {
+.button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
+}
   
-  .successContainer {
+.successContainer {
     text-align: center;
-  }
+}
   
-  .successIcon {
+.successIcon {
     font-size: 4rem;
     margin-bottom: 1rem;
-  }
+}
   
-  .successTitle {
+.successTitle {
     font-size: 1.5rem;
     font-weight: bold;
     color: #16a34a;
     margin-bottom: 0.5rem;
-  }
+}
   
-  .successMessage {
+.successMessage {
     color: #6b7280;
-  }
+}
   
-  .footer {
+.footer {
     margin-top: 1rem;
     text-align: center;
     font-size: 0.875rem;
     color: #6b7280;
-  }
+}
   
-  .link {
+.link {
     color: #16a34a;
     font-weight: 500;
     text-decoration: none;
-  }
+}
   
-  .link:hover {
+.link:hover {
     text-decoration: underline;
-  }
+}

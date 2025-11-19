@@ -11,12 +11,12 @@ export default function NewPerson() {
         redirect('/')
     }
 
-return (
-    <div className={styles.container}>
-        <h1>Add New Person</h1>
-            <PersonForm 
-                onSubmit={handleSubmit}
-            />
-    </div>
-)
+    return (
+        <div className={styles.container}>
+            <h1>Add New Person</h1>
+                <PersonForm 
+                    onSubmit={handleSubmit}
+                />
+        </div>
+    )
 }
