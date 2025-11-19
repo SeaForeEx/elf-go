@@ -29,8 +29,10 @@ export default async function Home() {
         <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
         <LogoutButton />
         
-        <h2 className={styles.subtitle}>People</h2>
-        <CreateButton itemType={'person'} />
+        <h2 className={styles.subtitle}>
+            People
+            <CreateButton itemType={'person'} />
+        </h2>
 
         {people && people.length > 0 ? (
             <ul className={styles.peopleList}>

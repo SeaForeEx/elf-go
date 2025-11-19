@@ -91,3 +91,19 @@
 .link:hover {
     text-decoration: underline;
 }
+
+.backLink {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #16a34a;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .backLink:hover {
+    background-color: #15803d;
+  }
