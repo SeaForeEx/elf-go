@@ -42,40 +42,41 @@
     background-color: white;
 }
   
-.form button[type="submit"] {
-    width: 100%;
-    padding: 0.75rem 1.5rem;
-    background-color: #16a34a;
+.form button {
+    padding: 12px 20px;
     color: white;
     border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-size: 1rem;
+}
+
+.submitButton {
+    background-color: #16a34a;
 }
   
-.form button[type="submit"]:hover {
+.submitButton:hover {
     background-color: #15803d;
 }
   
-.form button[type="submit"]:disabled {
+.form button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.backLink {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: #16a34a;
-    color: white;
-    text-decoration: none;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.cancelButton {
+    background-color: #dc2626;
 }
-  
-.backLink:hover {
-    background-color: #15803d;
+
+.cancelButton:hover {
+    background-color: #b91c1c;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 2rem;
+}
+
+.buttonContainer button {
+    flex: 1;
 }

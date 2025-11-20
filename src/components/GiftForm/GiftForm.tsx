@@ -1,10 +1,12 @@
 'use client'
 
-import Link from "next/link"
 import { useState } from "react"
 import styles from './GiftForm.module.css'
+import { useRouter } from "next/navigation"
 
 type GiftFormProps = {
+    personId: string
+    personName: string
     initialData?: {
         name: string
         status: string | null
@@ -13,9 +15,13 @@ type GiftFormProps = {
 }
 
 export default function GiftForm({
+    personId,
+    personName,
     initialData,
     onSubmit
 }: GiftFormProps) {
+    const router = useRouter();
+
     const [name, setName] = useState(initialData?.name || '')
     const [status, setStatus] = useState(initialData?.status || 'not purchased')
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -52,15 +58,24 @@ export default function GiftForm({
                     </select>
                 </div>
 
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Saving...' : 'Save'}
-                </button>
+                <div className={styles.buttonContainer}>
+                    <button 
+                        type="submit"
+                        className={styles.submitButton}
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? 'Saving...' : 'Save'}
+                    </button>
+
+                    <button 
+                        type="button"
+                        className={styles.cancelButton}
+                        onClick={() => personId ? router.push(`/person/${personId}`) : router.push('/')}
+                    >
+                        Cancel
+                    </button>
+                </div>
             </form>
-            <h1>
-                <Link href={`/`} className={styles.backLink}>
-                    Back to Home
-                </Link>
-            </h1>
         </>
     )
 }

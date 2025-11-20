@@ -4,8 +4,6 @@ import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
-import { redirect } from 'next/navigation'
-import LogoutButton from '@/components/auth/LogoutButton/LogoutButton'
 
 export default async function Home() {
     const supabase = await createClient()
@@ -32,7 +30,7 @@ export default async function Home() {
                     {people?.map((person) => (
                     <li key={person.id} className={styles.personListItem}>
                         <Link href={`/person/${person.id}`} className={styles.personLink}>
-                        {person.name}
+                            {person.name}
                         </Link>
                         <EditButton 
                             itemType='person'

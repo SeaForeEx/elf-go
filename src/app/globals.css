@@ -36,6 +36,7 @@ a {
 
 button {
     font-family: inherit;
+    font-weight: 600;
 }
 
 input,
@@ -44,12 +45,6 @@ textarea {
     font-family: inherit;
 }
 
-/* Hide Next.js dev indicator */
-#__next-build-watcher {
-    display: none !important;
-}
-
-/* Alternative - try this if above doesn't work */
 nextjs-portal {
     display: none !important;
 }

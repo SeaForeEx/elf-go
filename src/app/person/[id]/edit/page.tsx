@@ -31,9 +31,10 @@ export default async function EditPerson({
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>
-                Edit Person
+                Edit {person.name}
             </h1>
             <PersonForm 
+                personId={person.id}
                 initialData={person}
                 onSubmit={handleSubmit}
             />

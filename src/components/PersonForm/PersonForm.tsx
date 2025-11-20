@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import styles from './PersonForm.module.css'
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 type PersonFormProps = {
+    personId?: string
     initialData?: {
         name: string
         hobbies: string | null
@@ -13,9 +14,12 @@ type PersonFormProps = {
 }
 
 export default function PersonForm({
+    personId,
     initialData,
     onSubmit
 }: PersonFormProps) {
+    const router = useRouter()
+    
     const [name, setName] = useState(initialData?.name || '')
     const [hobbies, setHobbies] = useState(initialData?.hobbies || '')
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -47,15 +51,24 @@ export default function PersonForm({
                     />
                 </div>
 
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Saving...' : 'Save'}
-                </button>
+                <div className={styles.buttonContainer}>
+                    <button 
+                        type="submit" 
+                        className={styles.submitButton}
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? 'Saving...' : 'Save'}
+                    </button>
+
+                    <button 
+                        type="button"
+                        className={styles.cancelButton}
+                        onClick={() => personId ? router.push(`/person/${personId}`) : router.push('/')}
+                    >
+                        Cancel
+                    </button>
+                </div>
             </form>
-            <h1>
-                <Link href={`/`} className={styles.backLink}>
-                    Back to Home
-                </Link>
-            </h1>
         </>
     )
 }
