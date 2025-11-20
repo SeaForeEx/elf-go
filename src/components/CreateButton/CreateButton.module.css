@@ -1,19 +1,61 @@
+.buttonWrapper {
+    position: relative;
+    display: inline-block;
+}
+
 .createButton {
-    padding: 8px 16px;
-    background-color: #0fb84d; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;      
+    height: 2.5rem;     
+    padding: 0;
+    background-color: #0fb84d;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
 }
   
 .createButton:hover:not(:disabled) {
-    background-color: #096b2b; 
+    background-color: #096b2b;
+    transform: scale(1.05);
 }
 
 .createButton:disabled {
     background-color: #999;
     cursor: not-allowed;
+}
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #1f2937;
+    color: white;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 1000;
+    font-weight: 600;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2937;
 }

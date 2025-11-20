@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { deletePerson, deleteGift } from "@/app/actions"
 import styles from './DeleteButton.module.css'
+import TrashIcon from "../icons/TrashIcon"
 
 type DeleteButtonProps = {
     itemName: string
@@ -18,6 +19,8 @@ export default function DeleteButton({
     personId,
 }: DeleteButtonProps) {
     const [isDeleting, setIsDeleting] = useState(false)
+    const [showTooltip, setShowTooltip] = useState(false)
+
 
     const handleDelete = async () => {
         const confirmMessage = itemType === 'person' 
@@ -44,12 +47,21 @@ export default function DeleteButton({
     }
 
     return (
-        <button
-            onClick={handleDelete}
-            disabled={isDeleting}
-            className={styles.deleteButton}
+        <div 
+            className={styles.buttonWrapper}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
         >
-            {isDeleting ? 'Deleting...' : 'Delete'}
-        </button>
+            <button
+                onClick={handleDelete}
+                disabled={isDeleting}
+                className={styles.deleteButton}
+            >
+                <TrashIcon className={styles.icon} />
+            </button>
+            {showTooltip && !isDeleting && (
+                <span className={styles.tooltip}>Delete {itemType === 'person' ? 'person' : 'gift'}</span>
+            )}
+        </div>
     )
 }
