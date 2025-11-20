@@ -13,9 +13,15 @@ export default function LogoutButton() {
     const [showTooltip, setShowTooltip] = useState(false)
 
     const handleLogout = async () => {
-        await supabase.auth.signOut()
-        router.push('/login')
-        router.refresh()
+        const confirmMessage = "Are you sure you want to logout?"
+
+        if(!confirm(confirmMessage)) {
+            return
+        } else {
+            await supabase.auth.signOut()
+            router.push('/login')
+            router.refresh()
+        }
     }
 
     return (

@@ -1,9 +1,5 @@
 .container {
-    min-height: 100vh;
-    background: linear-gradient(to bottom right, #f0fdf4, #fef2f2);
-    padding: 2rem;
     max-width: 800px;
-    margin: 0 auto;
 }
   
 .subtitle {
