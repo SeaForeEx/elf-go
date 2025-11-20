@@ -9,15 +9,6 @@ import LogoutButton from '@/components/auth/LogoutButton/LogoutButton'
 
 export default async function Home() {
     const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    const today = new Date()
-    const christmas = new Date(today.getFullYear(), 11, 25)
-    const daysUntil = Math.ceil((Number(christmas) - Number(today)) / (1000 * 60 * 60 * 24))
-
-    if (!user) {
-        redirect('/login')
-    }
   
     const { data: people, error } = await supabase
         .from('people')
@@ -30,8 +21,6 @@ export default async function Home() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
-            <LogoutButton />
             
             <h2 className={styles.subtitle}>
                 People
@@ -60,10 +49,7 @@ export default async function Home() {
                     <p className={styles.noPeople}>No people yet</p>
                 )
             }
-            <div className={`${styles.title} ${styles.countdown}`}>
-                {daysUntil} days until Christmas!
-            </div>
-        
+
         </div>
     )
 }

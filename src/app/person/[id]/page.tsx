@@ -27,8 +27,6 @@ export default async function Person({ params }: { params: Promise<{ id: string 
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>ELF GO! - Gift Tracker</h1>
-            
             <h2 className={styles.subtitle}>
                 {person.name}
                 <EditButton 
