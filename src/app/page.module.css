@@ -73,3 +73,7 @@
     border-radius: 0.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+.countdown {
+    margin-top: 20px;
+}
