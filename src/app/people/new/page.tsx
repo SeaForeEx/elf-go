@@ -7,8 +7,13 @@ import { redirect } from "next/navigation";
 export default function NewPerson() {
     async function handleSubmit(data: { name: string; hobbies: string }) {
         'use server'
-        await createPerson(data)
-        redirect('/')
+        const result = await createPerson(data)
+        
+        if (result.success && result.personId) {
+            redirect(`/person/${result.personId}`)
+        } else {
+            console.error(result.error)
+        }
     }
 
     return (

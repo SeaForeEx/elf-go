@@ -4,7 +4,6 @@ import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
-import { deleteGift, deletePerson } from '@/app/actions'
 
 export default async function Person({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -22,8 +21,6 @@ export default async function Person({ params }: { params: Promise<{ id: string 
     if (error || !person) {
         return <div>Person not found</div>
     }
-
-    console.log("Gifts: ", person.gifts);
 
     return (
         <div className={styles.container}>
@@ -44,7 +41,11 @@ export default async function Person({ params }: { params: Promise<{ id: string 
             </h3>
 
             <h2 className={styles.subtitle}>
-                Gifts
+                {person.name}'s Gifts
+                <CreateButton 
+                    itemType={'gift'}
+                    personId={person.id} 
+                />
             </h2>
 
             {person.gifts && person.gifts.length > 0 ? (
@@ -72,15 +73,6 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                 <p className={styles.noGifts}>No gifts yet</p>
             )
             }
-            <CreateButton 
-                itemType={'gift'}
-                personId={person.id} 
-            />
-            <h1>
-                <Link href={`/`} className={styles.backLink}>
-                    Back to Home
-                </Link>
-            </h1>
         </div>
     )
 }

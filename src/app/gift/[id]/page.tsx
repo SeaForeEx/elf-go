@@ -10,7 +10,13 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
 
     const { data: gift, error } = await supabase
         .from('gifts')
-        .select('*')
+        .select(`
+            *,
+            people (
+                name,
+                id
+            )
+        `)
         .eq('id', id)
         .single()
 
@@ -36,8 +42,8 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
                 Status - {gift.status}
             </h3>
             <h1>
-                <Link href={`/`} className={styles.backLink}>
-                    Back to Home
+                <Link href={`/person/${gift.people.id}`} className={styles.backLink}>
+                    Back to {gift.people.name}
                 </Link>
             </h1>
         </div>

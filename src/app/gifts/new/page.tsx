@@ -36,7 +36,9 @@ export default async function NewGift({
     return (
         <div className={styles.container}>
             <h1>Add New Gift for {person.name}</h1>
-            <GiftForm 
+            <GiftForm
+                personId={personId}
+                personName={person.name} 
                 onSubmit={handleSubmit}
             />
         </div>

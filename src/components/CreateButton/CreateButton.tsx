@@ -1,7 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import styles from './CreateButton.module.css'
+import { useRouter } from 'next/navigation'
 
 type CreateButtonProps = {
     itemType: 'person' | 'gift'
@@ -12,17 +12,22 @@ export default function CreateButton({
     itemType,
     personId
 }: CreateButtonProps) {
+    const router = useRouter()
 
-    const editHref = itemType === 'person'
-        ? `/people/new`
-        : `/gifts/new?personId=${personId}`
+    const handleSubmit = async () => {
+        if (itemType === 'person') {
+            router.push(`/people/new`)
+        } else {
+            router.push(`/gifts/new?personId=${personId}`)
+        }
+    }
 
     return (
-        <Link 
-            href={editHref}
+        <button 
+            onClick={handleSubmit}
             className={styles.createButton}
         >
             New {itemType === 'person' ? 'Person' : 'Gift'}
-        </Link>
+        </button>
     )
 }

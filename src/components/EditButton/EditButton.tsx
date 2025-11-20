@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import styles from './EditButton.module.css'
 
 type EditButtonProps = {
@@ -14,17 +14,22 @@ export default function EditButton({
     personId,
     giftId 
 }: EditButtonProps) {
+    const router = useRouter()
 
-    const editHref = itemType === 'person'
-        ? `/person/${personId}/edit`
-        : `/gift/${giftId}/edit`
+    const handleEdit = async () => {
+        if (itemType === 'person') {
+            router.push(`/person/${personId}/edit`)
+        } else {
+            router.push(`/gift/${giftId}/edit`)
+        }
+    }
 
     return (
-        <Link 
-            href={editHref}
+        <button 
+            onClick={handleEdit}
             className={styles.editButton}
         >
             Edit
-        </Link>
+        </button>
     )
 }

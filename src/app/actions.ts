@@ -14,20 +14,22 @@ export async function createPerson(data: { name: string; hobbies: string }) {
         throw new Error('Not authenticated')
     }
     
-    const { error } = await supabase
+    const { data: newPerson, error } = await supabase
         .from('people')
         .insert({
             name: data.name,
             hobbies: data.hobbies,
             user_id: user.id
-    })
+        })
+        .select()
+        .single()
     
     if (error) {
         return { success: false, error: error.message }
     }
     
     revalidatePath('/')
-    return { success: true }
+    return { success: true, personId: newPerson.id }
 }
 
 export async function updatePerson(

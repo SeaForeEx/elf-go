@@ -14,7 +14,13 @@ export default async function EditGift({
 
     const { data: gift } = await supabase
         .from('gifts')
-        .select('*')
+        .select(`
+            *,
+            people (
+                name,
+                id
+            )
+        `)
         .eq('id', id)
         .single()
 
@@ -34,6 +40,8 @@ export default async function EditGift({
                 Edit Gift
             </h1>
             <GiftForm 
+                personId={gift.people.id}
+                personName={gift.people.name}
                 initialData={gift}
                 onSubmit={handleSubmit}
             />

@@ -1,6 +1,7 @@
 import styles from './Header.module.css'
 import LogoutButton from '../auth/LogoutButton/LogoutButton'
 import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
 
 export default async function Header() {
     const supabase = await createClient()
@@ -12,7 +13,11 @@ export default async function Header() {
 
     return (
         <header className={styles.header}>
-            <h1 className={styles.title}>🎄 ELF GO! - Gift Tracker</h1>
+            <h1 className={styles.title}>
+                <Link href={'/'}>
+                    🎄 ELF GO! - Gift Tracker
+                </Link>
+            </h1>
             <LogoutButton />
         </header>
     )
