@@ -1,12 +1,15 @@
 .wrapper {
-    min-height: 100vh;
+    height: 100vh;     
+    height: 100dvh;     
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(to bottom right, #f0fdf4, #fef2f2);
+    overflow: hidden;  
 }
   
 .container {
     width: 100%;
     max-width: 28rem;
+    padding: 1rem;     
 }
