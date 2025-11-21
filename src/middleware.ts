@@ -3,9 +3,10 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 /**
  * MIDDLEWARE: Runs BEFORE every page loads
- * Purpose: Check authentication and redirect users accordingly
+ * Purpose: Check authentication, profile completeness, and redirect users accordingly
  * - Protects routes from unauthenticated users
  * - Prevents logged-in users from seeing login/signup pages
+ * - Ensures users complete their profile before accessing the app
  */
 export async function middleware(request: NextRequest) {
     // Create initial response object that will continue to the requested page
@@ -100,6 +101,28 @@ export async function middleware(request: NextRequest) {
      */
     if (user && (request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup'))) {
         return NextResponse.redirect(new URL('/', request.url))
+    }
+
+    /**
+     * PROTECTION RULE #3: Ensure profile is complete
+     * 
+     * If user IS logged in but hasn't completed their profile:
+     * - Check if they have name and budget set
+     * - If not, redirect to /profile/setup
+     * 
+     * We exclude /profile/setup and /profile/edit from this check to avoid redirect loops
+     */
+    if (user && !request.nextUrl.pathname.startsWith('/profile/setup') && !request.nextUrl.pathname.startsWith('/profile/edit')) {
+        const { data: profile, error } = await supabase
+            .from('profiles')
+            .select('name, budget')
+            .eq('id', user.id)
+            .single()
+
+        // If profile doesn't exist OR is incomplete, redirect to setup
+        if (error || !profile || !profile.name || !profile.budget) {
+            return NextResponse.redirect(new URL('/profile/setup', request.url))
+        }
     }
 
     /**
