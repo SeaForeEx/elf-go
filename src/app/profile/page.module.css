@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #16a34a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.profileCard {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.infoRow:last-of-type {
+    border-bottom: none;
+    margin-bottom: 1.5rem;
+}
+
+.emailRow {
+    justify-content: center;
+}
+
+.label {
+    font-weight: 600;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.value {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.editButton {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: #16a34a;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.editButton:hover {
+    background-color: #15803d;
+}
