@@ -77,44 +77,58 @@ export async function deletePerson(personId: string) {
 
 export async function createGift(
     personId: string,
-    data: { name: string; status: string }
+    data: { name: string; price: number; status: string }
 ) {
+    console.log('createGift called with:', { personId, data })  // ← ADD THIS
+    
     const supabase = await createClient()
 
-    const { error } = await supabase
+    const { data: newGift, error } = await supabase
         .from('gifts')
         .insert({
             person_id: personId,
             name: data.name,
+            price: data.price,
             status: data.status
         })
+        .select()  // ← ADD THIS to return the created gift
+        .single()  // ← ADD THIS
 
     if (error) {
+        console.error('createGift error:', error)  // ← ADD THIS
         return { success: false, error: error.message }
     }
+
+    console.log('createGift success:', newGift)  // ← ADD THIS
+    revalidatePath(`/person/${personId}`)
+    return { success: true }
 }
 
 export async function updateGift(
     giftId: string,
-    data: { name: string; status: string }
-) 
-{
+    data: { name: string; price: number; status: string }
+) {
+    console.log('updateGift called with:', { giftId, data })  // ← ADD THIS
+    
     const supabase = await createClient()
 
     const { error } = await supabase
-    .from('gifts')
-    .update({
-        name: data.name,
-        status: data.status
-    })
-    .eq('id', giftId)
+        .from('gifts')
+        .update({
+            name: data.name,
+            price: data.price,
+            status: data.status
+        })
+        .eq('id', giftId)
 
     if (error) {
+        console.error('updateGift error:', error)  // ← ADD THIS
         return { success: false, error: error.message }
     }
 
+    console.log('updateGift success')  // ← ADD THIS
     revalidatePath(`/gift/${giftId}`)
-    redirect(`/gift/${giftId}`)
+    return { success: true }
 }
 
 export async function deleteGift(giftId: string, personId?: string) {

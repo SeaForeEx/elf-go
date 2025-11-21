@@ -27,7 +27,7 @@ export default async function NewGift({
         return <div>Person not found</div>
     }
 
-    async function handleSubmit(data: { name: string; status: string }) {
+    async function handleSubmit(data: { name: string; price: number; status: string }) {
         'use server'
         await createGift(personId!, data)
         redirect(`/person/${personId}`)
@@ -38,7 +38,6 @@ export default async function NewGift({
             <h1>Add New Gift for {person.name}</h1>
             <GiftForm
                 personId={personId}
-                personName={person.name} 
                 onSubmit={handleSubmit}
             />
         </div>

@@ -6,30 +6,34 @@ import { useRouter } from "next/navigation"
 
 type GiftFormProps = {
     personId: string
-    personName: string
     initialData?: {
         name: string
+        price: number | null
         status: string | null
     }
-    onSubmit: (data: { name: string; status: string }) => Promise<void>
+    onSubmit: (data: { name: string; price: number, status: string }) => Promise<void>
 }
 
 export default function GiftForm({
     personId,
-    personName,
     initialData,
     onSubmit
 }: GiftFormProps) {
     const router = useRouter();
 
     const [name, setName] = useState(initialData?.name || '')
+    const [price, setPrice] = useState(initialData?.price?.toString() || '0') 
     const [status, setStatus] = useState(initialData?.status || 'not purchased')
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
-        await onSubmit({ name, status })
+        await onSubmit({ 
+            name, 
+            price: parseFloat(price) || 0,
+            status 
+        })
     }
 
     return (
@@ -43,6 +47,20 @@ export default function GiftForm({
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
+                </div>
+
+                <div className={styles.field}>
+                    <label>Price:</label>
+                    <input
+                        type="text"
+                            value={price}
+                            onChange={(e) => {
+                                const value = e.target.value
+                                // Allow empty, numbers, and one decimal point
+                                if (value === '' || /^\d*\.?\d*$/.test(value)) {
+                                    setPrice(value)
+                                }
+                            }}                    />
                 </div>
 
                 <div className={styles.field}>
