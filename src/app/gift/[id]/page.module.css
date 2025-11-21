@@ -39,3 +39,24 @@
 .backLink:hover {
     background-color: #15803d;
 }
+
+.giftCard {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.infoRow:last-of-type {
+    border-bottom: none;
+}

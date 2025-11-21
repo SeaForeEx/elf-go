@@ -38,9 +38,21 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
                     giftId={gift.id}
                 />
             </h2>
-            <h3>
-                Status - {gift.status}
-            </h3>
+            <div className={styles.giftCard}>
+                <div className={styles.infoRow}>
+                    <span className={styles.label}>Price:</span>
+                    <span className={styles.value}>
+                        ${gift.price ? Number(gift.price).toFixed(2) : '0.00'}
+                    </span>
+                </div>
+
+                <div className={styles.infoRow}>
+                    <span className={styles.label}>Status:</span>
+                    <span className={styles.value}>
+                        {gift.status}
+                    </span>
+                </div>
+            </div>
             <h1>
                 <Link href={`/person/${gift.people.id}`} className={styles.backLink}>
                     Back to {gift.people.name}

@@ -28,7 +28,7 @@ export default async function EditGift({
         return <div>Gift not found</div>
     }
 
-    async function handleSubmit(data: { name: string, status: string}) {
+    async function handleSubmit(data: { name: string, price: number, status: string}) {
         'use server'
         await updateGift(id, data)
         redirect(`/gift/${id}`)
@@ -41,7 +41,6 @@ export default async function EditGift({
             </h1>
             <GiftForm 
                 personId={gift.people.id}
-                personName={gift.people.name}
                 initialData={gift}
                 onSubmit={handleSubmit}
             />
