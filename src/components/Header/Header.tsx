@@ -16,7 +16,7 @@ export default async function Header() {
         <header className={styles.header}>
             <h1 className={styles.title}>
                 <Link href={'/'}>
-                    🎄 ELF GO! - Gift Tracker
+                    🎄 ELF GO!
                 </Link>
             </h1>
             <div className={styles.actions}>
