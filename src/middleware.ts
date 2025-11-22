@@ -107,7 +107,7 @@ export async function middleware(request: NextRequest) {
      * PROTECTION RULE #3: Ensure profile is complete
      * 
      * If user IS logged in but hasn't completed their profile:
-     * - Check if they have name and budget set
+     * - Check if they have name and budget set (budget can be 0!)
      * - If not, redirect to /profile/setup
      * 
      * We exclude /profile/setup and /profile/edit from this check to avoid redirect loops
@@ -119,8 +119,8 @@ export async function middleware(request: NextRequest) {
             .eq('id', user.id)
             .single()
 
-        // If profile doesn't exist OR is incomplete, redirect to setup
-        if (error || !profile || !profile.name || !profile.budget) {
+        // Check for null/undefined specifically (0 is a valid budget!)
+        if (error || !profile || !profile.name || profile.budget === null || profile.budget === undefined) {
             return NextResponse.redirect(new URL('/profile/setup', request.url))
         }
     }

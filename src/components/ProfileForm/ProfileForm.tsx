@@ -19,13 +19,20 @@ export default function ProfileForm({
     const router = useRouter()
 
     const [name, setName] = useState(initialData?.name || '')
-    const [budget, setBudget] = useState(initialData?.budget || 0)
+    const [budget, setBudget] = useState(initialData?.budget?.toString() || '0')
     const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const isSetup = !initialData?.name && initialData?.budget == null
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
-        await onSubmit({ name, budget })
+        const budgetValue = parseFloat(budget)
+
+        await onSubmit({ 
+            name, 
+            budget: isNaN(budgetValue) ? 0 : budgetValue
+        })
     }
 
     return (
@@ -44,10 +51,16 @@ export default function ProfileForm({
                 <div className={styles.field}>
                     <label>Budget:</label>
                     <input 
-                        type="number"
-                        step="1"
+                        type="text"
                         value={budget}
-                        onChange={(e) => setBudget(Number(e.target.value))}
+                        onChange={(e) => {
+                            const value = e.target.value
+                            // Allow empty, numbers, and one decimal point
+                            if (value === '' || /^\d*\.?\d*$/.test(value)) {
+                                setBudget(value)
+                            }
+                        }}
+                        inputMode="decimal"
                     />
                 </div>
 
@@ -60,13 +73,15 @@ export default function ProfileForm({
                         {isSubmitting ? 'Saving...' : 'Save'}
                     </button>
 
-                    <button
-                        type="button"
-                        className={styles.cancelButton}
-                        onClick={() => router.push('/')}
-                    >
-                        Cancel
-                    </button>
+                    {!isSetup && (
+                        <button
+                            type="button"
+                            className={styles.cancelButton}
+                            onClick={() => router.push('/profile')}
+                        >
+                            Cancel
+                        </button>
+                    )}
                 </div>
             </form>
         </>

@@ -24,19 +24,27 @@ export default async function Home() {
         .eq('id', user?.id)
         .single()
 
-    let giftSumActual = 0;
-    let giftSumPlanned = 0;
+    const hasBudget = profile?.budget != null && profile?.budget > 0
+    let remainingActual = 0
+    let remainingPlanned = 0
 
-    gifts?.forEach((gift) => {
-        if (gift.status === 'purchased' || gift.status === 'wrapped') {
-            giftSumActual += gift.price;
-        }
-        giftSumPlanned += gift.price;
-    })
+    if (hasBudget) {
+        let giftSumActual = 0
+        let giftSumPlanned = 0
 
-    const remainingActual = profile?.budget - giftSumActual;
-    const remainingPlanned = profile?.budget - giftSumPlanned;
+        gifts?.forEach((gift) => {
+            if (gift.status === 'purchased' || gift.status === 'wrapped') {
+                giftSumActual += gift.price;
+            }
+            giftSumPlanned += gift.price;
+        })
+    
+        remainingActual = Number(profile?.budget - giftSumActual)
+        remainingPlanned = Number(profile?.budget - giftSumPlanned)
+    }
 
+    const isActualNegative = remainingActual < 0
+    const isPlannedNegative = remainingPlanned < 0 
     
     if (peopleError) {
         return <div>Error: {peopleError.message}</div>
@@ -52,21 +60,25 @@ export default async function Home() {
 
     return (
         <div className={styles.container}>
-            <h2 className={styles.subtitle}>
-                Remaining Budget
-            </h2>
+            { hasBudget && 
+                <>
+                    <h2 className={styles.subtitle}>
+                        Remaining Budget
+                    </h2>
 
-            <div className={styles.budgetContainer}>
-                <div className={`${styles.budget} ${styles.budgetActual}`}>
-                    <div className={styles.budgetText}>Actual</div>
-                    <div className={styles.budgetPrice}>${remainingActual}</div>
-                </div>
+                    <div className={styles.budgetContainer}>
+                        <div className={`${styles.budget} ${styles.budgetActual} ${isActualNegative ? styles.budgetNegative : ''}`}>
+                            <div className={styles.budgetText}>Actual</div>
+                            <div className={styles.budgetPrice}>${remainingActual.toFixed(2)}</div>
+                        </div>
 
-                <div className={`${styles.budget} ${styles.budgetPlanned}`}>
-                    <div className={styles.budgetText}>Planned</div>
-                    <div className={styles.budgetPrice}>${remainingPlanned}</div>
-                </div>
-            </div>
+                        <div className={`${styles.budget} ${styles.budgetPlanned} ${isPlannedNegative ? styles.budgetNegative : ''}`}>
+                            <div className={styles.budgetText}>Planned</div>
+                            <div className={styles.budgetPrice}>${remainingPlanned.toFixed(2)}</div>
+                        </div>
+                    </div>
+                </>
+            }
 
             <h2 className={styles.subtitle}>
                 People
