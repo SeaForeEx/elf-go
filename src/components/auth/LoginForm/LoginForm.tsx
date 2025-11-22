@@ -35,7 +35,12 @@ export default function LoginForm () {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>ELF GO Login</h1>
+            <h1 className={styles.title}>🎄 ELF GO!</h1>
+            <p className={styles.description}>
+                Track your gifts, manage your budget, and make holiday shopping stress-free!            </p>
+            <p className={styles.tagline}>
+                It's gift giving, simplified.
+            </p>
 
             <form onSubmit={handleLogin} className={styles.form}>
                 {error && (
