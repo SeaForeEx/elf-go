@@ -31,16 +31,20 @@
 .budgetContainer {
     display: flex;
     flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .budget {
+    flex: 1;
     background-color: white;
     padding: 0.75rem;
     border-radius: 0.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-width: 2px;
     border-style: solid;
-    margin-right: 1rem;
+    box-sizing: border-box;
 }
 
 .budgetActual {
@@ -59,6 +63,19 @@
 .budgetPrice {
     font-size: 28px;
     font-weight: 700;
+}
+
+.budgetNegative .budgetText {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.budgetNegative {
+    border-color: #dc2626 !important;
+}
+
+.budgetNegative .budgetPrice {
+    color: #dc2626;
 }
   
 .peopleList {
@@ -111,4 +128,10 @@
 
 .countdown {
     margin-top: 20px;
+}
+
+@media (max-width: 400px) {
+    .budgetPrice {
+        font-size: 24px; /* Down from 28px */
+    }
 }

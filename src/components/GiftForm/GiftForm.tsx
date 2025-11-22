@@ -53,14 +53,16 @@ export default function GiftForm({
                     <label>Price:</label>
                     <input
                         type="text"
-                            value={price}
-                            onChange={(e) => {
-                                const value = e.target.value
-                                // Allow empty, numbers, and one decimal point
-                                if (value === '' || /^\d*\.?\d*$/.test(value)) {
-                                    setPrice(value)
-                                }
-                            }}                    />
+                        value={price}
+                        onChange={(e) => {
+                            const value = e.target.value
+                            // Allow empty, numbers, and one decimal point
+                            if (value === '' || /^\d*\.?\d*$/.test(value)) {
+                                setPrice(value)
+                            }
+                        }}
+                        inputMode="decimal"                    
+                    />
                 </div>
 
                 <div className={styles.field}>
