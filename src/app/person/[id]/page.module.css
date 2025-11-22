@@ -32,6 +32,48 @@
     margin-bottom: 2rem;
     font-style: italic;
 }
+
+.statusIndex {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.statusItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.statusDot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.statusWrapped {
+    background-color: #16a34a; /* Green */
+}
+
+.statusPurchased {
+    background-color: #f59e0b; /* Amber */
+}
+
+.statusNotPurchased {
+    background-color: #dc2626; /* Red */
+}
+
+.giftNotPurchased {
+    border-color: #dc2626;
+}
+
+.giftPurchased {
+    border-color: #f59e0b;
+}
+
+.giftWrapped {
+    border-color: #16a34a;
+}
   
 .giftList {
     list-style: none;
@@ -51,6 +93,8 @@
     align-items: center;
     gap: 1rem;
     transition: transform 0.2s, box-shadow 0.2s;
+    border-width: 2px;
+    border-style: solid;
 }
   
 .giftListItem:hover {
