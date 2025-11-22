@@ -20,8 +20,6 @@ export default async function Header() {
                 </Link>
             </h1>
             <div className={styles.actions}>
-                <Link href="/profile" className={styles.profileLink}>
-                </Link>
                 <ProfileButton />
                 <LogoutButton />
             </div>

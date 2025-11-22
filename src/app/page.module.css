@@ -27,6 +27,39 @@
     gap: 1rem;
     flex-wrap: wrap;
 }
+
+.budgetContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.budget {
+    background-color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-width: 2px;
+    border-style: solid;
+    margin-right: 1rem;
+}
+
+.budgetActual {
+    border-color: #16a34a;
+}
+
+.budgetPlanned {
+    border-color: #f59e0b;
+}
+
+.budgetText {
+    margin-bottom: 0.5rem;
+    color: rgb(72, 80, 86);
+}
+
+.budgetPrice {
+    font-size: 28px;
+    font-weight: 700;
+}
   
 .peopleList {
     list-style: none;
