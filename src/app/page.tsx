@@ -60,45 +60,6 @@ export default async function Home() {
 
     return (
         <div className={styles.container}>
-            {/* { hasBudget ? 
-                (
-                    <>
-                        <h2 className={styles.subtitle}>
-                            Remaining Budget
-                        </h2>
-
-                        <div className={styles.budgetContainer}>
-                            <div className={`${styles.budget} ${styles.budgetActual} ${isActualNegative ? styles.budgetNegative : ''}`}>
-                                <div className={styles.budgetText}>Actual</div>
-                                <div className={styles.budgetPrice}>${remainingActual.toFixed(2)}</div>
-                            </div>
-
-                            <div className={`${styles.budget} ${styles.budgetPlanned} ${isPlannedNegative ? styles.budgetNegative : ''}`}>
-                                <div className={styles.budgetText}>Planned</div>
-                                <div className={styles.budgetPrice}>${remainingPlanned.toFixed(2)}</div>
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <>
-                        <h2 className={styles.subtitle}>
-                            Money Spent
-                        </h2>
-
-                        <div className={styles.budgetContainer}>
-                            <div className={`${styles.budget} ${styles.budgetActual}`}>
-                                <div className={styles.budgetText}>Actual</div>
-                                <div className={styles.budgetPrice}>${giftSumActual.toFixed(2)}</div>
-                            </div>
-
-                            <div className={`${styles.budget} ${styles.budgetPlanned}`}>
-                                <div className={styles.budgetText}>Planned</div>
-                                <div className={styles.budgetPrice}>${giftSumPlanned.toFixed(2)}</div>
-                            </div>
-                        </div>
-                    </>
-                )
-            } */}
 
             <h2 className={styles.subtitle}>
                 {hasBudget ? 'Remaining Budget' : 'Money Spent'}
