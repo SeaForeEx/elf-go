@@ -60,7 +60,7 @@ export default async function Home() {
 
     return (
         <div className={styles.container}>
-            { hasBudget ? 
+            {/* { hasBudget ? 
                 (
                     <>
                         <h2 className={styles.subtitle}>
@@ -98,7 +98,23 @@ export default async function Home() {
                         </div>
                     </>
                 )
-            }
+            } */}
+
+            <h2 className={styles.subtitle}>
+                {hasBudget ? 'Remaining Budget' : 'Money Spent'}
+            </h2>
+
+            <div className={styles.budgetContainer}>
+                <div className={`${styles.budget} ${styles.budgetActual} ${isActualNegative ? styles.budgetNegative : ''}`}>
+                    <div className={styles.budgetText}>Actual</div>
+                    <div className={styles.budgetPrice}>{hasBudget ? `$${remainingActual.toFixed(2)}` : `$${giftSumActual.toFixed(2)}`}</div>
+                </div>
+
+                <div className={`${styles.budget} ${styles.budgetPlanned} ${isPlannedNegative ? styles.budgetNegative : ''}`}>
+                    <div className={styles.budgetText}>Planned</div>
+                    <div className={styles.budgetPrice}>{hasBudget ? `$${remainingPlanned.toFixed(2)}` : `$${giftSumPlanned.toFixed(2)}`}</div>
+                </div>
+            </div>
 
             <h2 className={styles.subtitle}>
                 People
