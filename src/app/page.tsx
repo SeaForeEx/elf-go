@@ -11,7 +11,7 @@ export default async function Home() {
   
     const { data: people, error: peopleError } = await supabase
         .from('people')
-        .select('id, name')
+        .select('id, name, group_id')
         .order('name')
 
     const { data: gifts, error: giftError} = await supabase
@@ -23,6 +23,11 @@ export default async function Home() {
         .select('budget')
         .eq('id', user?.id)
         .single()
+
+    const { data: groups, error: groupError } = await supabase
+        .from('groups')
+        .select('id, name')
+        .order('name')
 
     const hasBudget = profile?.budget != null && profile?.budget > 0
     let remainingActual = 0
@@ -58,6 +63,10 @@ export default async function Home() {
         return <div>Error: {profileError.message}</div>
     }
 
+    if (groupError) {
+        return <div>Error: {groupError.message}</div>
+    }
+
     return (
         <div className={styles.container}>
 
@@ -78,26 +87,56 @@ export default async function Home() {
             </div>
 
             <h2 className={styles.subtitle}>
-                People
+                Groups
+                <CreateButton itemType={'group'} />
+            </h2>
+
+            {groups && groups.length > 0 ? (
+                <ul className={styles.peopleList}>
+                    {groups?.map((group) => (
+                    <li key={group.id} className={styles.personListItem}>
+                        <Link href={`/group/${group.id}`} className={styles.personLink}>
+                            {group.name}
+                        </Link>
+                        <EditButton 
+                            itemType='group'
+                            groupId={group.id} />
+                        <DeleteButton 
+                            itemName={group.name}
+                            itemType='group'
+                            groupId={group.id}
+                        />
+                    </li>
+                    ))}
+                </ul>
+                ) : (
+                    <p className={styles.noPeople}>No groups yet</p>
+                )
+            }
+
+            <h2 className={styles.subtitle}>
+                Other People
                 <CreateButton itemType={'person'} />
             </h2>
 
             {people && people.length > 0 ? (
                 <ul className={styles.peopleList}>
-                    {people?.map((person) => (
-                    <li key={person.id} className={styles.personListItem}>
-                        <Link href={`/person/${person.id}`} className={styles.personLink}>
-                            {person.name}
-                        </Link>
-                        <EditButton 
-                            itemType='person'
-                            personId={person.id} />
-                        <DeleteButton 
-                            itemName={person.name}
-                            itemType='person'
-                            personId={person.id}
-                        />
-                    </li>
+                    {people
+                        ?.filter((person) => !person.group_id)
+                        .map((person) => (
+                        <li key={person.id} className={styles.personListItem}>
+                            <Link href={`/person/${person.id}`} className={styles.personLink}>
+                                {person.name}
+                            </Link>
+                            <EditButton 
+                                itemType='person'
+                                personId={person.id} />
+                            <DeleteButton 
+                                itemName={person.name}
+                                itemType='person'
+                                personId={person.id}
+                            />
+                        </li>
                     ))}
                 </ul>
                 ) : (

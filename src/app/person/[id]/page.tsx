@@ -12,11 +12,13 @@ export default async function Person({ params }: { params: Promise<{ id: string 
     const { data: person, error } = await supabase
         .from('people')
         .select(`
-        *,
-        gifts (*)
+            *,
+            gifts (*),
+            groups (id, name)
         `)
         .eq('id', id)
         .single()
+
     
     if (error || !person) {
         return <div>Person not found</div>
@@ -36,8 +38,18 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                     personId={person.id}
                 />
             </h2>
-            <h3>Hobbies: {' '}
+            <h3>
+                Hobbies: {' '}
                 {person.hobbies || 'No hobbies listed'}
+                <br /><br />
+                Group: {' '}
+                {person.groups?.name ? (
+                    <Link href={`/group/${person.groups.id}`} className={styles.groupLink}>
+                        {person.groups.name}
+                    </Link>
+                ) : (
+                    'Not in a group'
+                )}
             </h3>
 
             <h2 className={styles.subtitle}>

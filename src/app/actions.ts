@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 // PERSON ACTIONS
 
-export async function createPerson(data: { name: string; hobbies: string }) {
+export async function createPerson(data: { name: string; hobbies: string; groupId: string | null }) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
@@ -19,6 +19,7 @@ export async function createPerson(data: { name: string; hobbies: string }) {
         .insert({
             name: data.name,
             hobbies: data.hobbies,
+            group_id: data.groupId,
             user_id: user.id
         })
         .select()
@@ -34,7 +35,7 @@ export async function createPerson(data: { name: string; hobbies: string }) {
 
 export async function updatePerson(
     personId: string, 
-    data: { name: string; hobbies: string }
+    data: { name: string; hobbies: string; groupId: string | null }
 )   
 {
     const supabase = await createClient()
@@ -43,7 +44,8 @@ export async function updatePerson(
         .from('people')
         .update({
             name: data.name,
-            hobbies: data.hobbies
+            hobbies: data.hobbies,
+            group_id: data.groupId
         })
         .eq('id', personId)
     
@@ -89,8 +91,8 @@ export async function createGift(
             price: data.price,
             status: data.status
         })
-        .select()  // ← ADD THIS to return the created gift
-        .single()  // ← ADD THIS
+        .select()
+        .single()
 
     if (error) {
         return { success: false, error: error.message }
@@ -138,6 +140,73 @@ export async function deleteGift(giftId: string, personId?: string) {
     revalidatePath(`/person/${personId}`)
     
     return { success: true }
+}
+
+// GROUP ACTIONS
+
+export async function createGroup(data: { name: string }) {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+        throw new Error('Not authenticated')
+    }
+
+    const { data: newGroup, error } = await supabase
+        .from('groups')
+        .insert({
+            name: data.name,
+            user_id: user.id
+        })
+        .select()
+        .single()
+
+    if (error) {
+        return { success: false, error: error.message }
+    }
+
+    revalidatePath('/')
+    return { success: true, groupId: newGroup.id}
+}
+
+export async function updateGroup(
+    groupId: string,
+    data: { name: string }
+)
+{
+    const supabase = await createClient()
+
+    const { error } = await supabase
+        .from('groups')
+        .update({
+            name: data.name
+        })
+        .eq('id', groupId)
+
+    if (error) {
+        return { success: false, error: error.message }
+    }
+
+    revalidatePath(`/person/${groupId}`)
+    revalidatePath('/')
+
+    return { success: true }
+}
+
+export async function deleteGroup(groupId: string) {
+    const supabase = await createClient()
+
+    const { error } = await supabase    
+        .from('groups')
+        .delete()
+        .eq('id', groupId)
+
+    if (error) {
+        return { success: false, error: error.message }
+    }
+
+    revalidatePath('/')
+    redirect('/')
 }
 
 // PROFILE ACTIONS

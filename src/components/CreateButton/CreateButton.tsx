@@ -6,7 +6,7 @@ import styles from './CreateButton.module.css'
 import { useRouter } from 'next/navigation'
 
 type CreateButtonProps = {
-    itemType: 'person' | 'gift'
+    itemType: 'person' | 'gift' | 'group'
     personId?: string 
 }
 
@@ -19,10 +19,18 @@ export default function CreateButton({
     
 
     const handleSubmit = async () => {
-        if (itemType === 'person') {
-            router.push(`/people/new`)
-        } else {
-            router.push(`/gifts/new?personId=${personId}`)
+        switch(itemType) {
+            case 'person':
+                router.push(`/people/new`)
+                break
+            case 'gift':
+                router.push(`/gifts/new?personId=${personId}`)
+                break
+            case 'group':
+                router.push(`/groups/new`)
+                break
+            default:
+                router.push('/')
         }
     }
 
@@ -39,7 +47,7 @@ export default function CreateButton({
                 <PlusIcon className={styles.icon} />
             </button>
             {showTooltip && (
-                <span className={styles.tooltip}>Add new {itemType === 'person' ? 'person' : 'gift'}</span>
+                <span className={styles.tooltip}>Add new {itemType}</span>
             )}
         </div>
     )

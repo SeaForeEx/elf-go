@@ -32,50 +32,8 @@
     margin-bottom: 2rem;
     font-style: italic;
 }
-
-.statusIndex {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.statusItem {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.statusDot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.statusWrapped {
-    background-color: #16a34a; /* Green */
-}
-
-.statusPurchased {
-    background-color: #f59e0b; /* Amber */
-}
-
-.statusNotPurchased {
-    background-color: #dc2626; /* Red */
-}
-
-.giftNotPurchased {
-    border-color: #dc2626;
-}
-
-.giftPurchased {
-    border-color: #f59e0b;
-}
-
-.giftWrapped {
-    border-color: #16a34a;
-}
   
-.giftList {
+.groupList {
     list-style: none;
     padding: 0;
     margin: 2rem 0;
@@ -84,7 +42,7 @@
     gap: 0.75rem;
 }
   
-.giftListItem {
+.groupListItem {
     background-color: white;
     padding: 1rem 1.5rem;
     border-radius: 0.5rem;
@@ -93,16 +51,14 @@
     align-items: center;
     gap: 1rem;
     transition: transform 0.2s, box-shadow 0.2s;
-    border-width: 2px;
-    border-style: solid;
 }
   
-.giftListItem:hover {
+.groupListItem:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
   
-.giftLink {
+.groupLink {
     flex: 1;
     font-size: 1.125rem;
     font-weight: 500;
@@ -111,11 +67,11 @@
     transition: color 0.2s;
 }
   
-.giftLink:hover {
+.groupLink:hover {
     color: #16a34a;
 }
   
-.noGifts {
+.noGroups {
     text-align: center;
     color: #6b7280;
     font-size: 1rem;
@@ -125,9 +81,3 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     margin: 2rem 0;
 }
-
-.groupLink {
-    color: #6B46C1;
-    font-weight: 600;
-}
-

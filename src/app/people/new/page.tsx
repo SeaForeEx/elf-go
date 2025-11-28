@@ -1,11 +1,19 @@
 import styles from './page.module.css';
 import { createPerson } from "@/app/actions";
 import PersonForm from '@/components/PersonForm/PersonForm';
+import { createClient } from '@/lib/supabase/server';
 import { redirect } from "next/navigation";
 
 
-export default function NewPerson() {
-    async function handleSubmit(data: { name: string; hobbies: string }) {
+export default async function NewPerson() {
+    const supabase = await createClient()
+
+    const { data: groups } = await supabase
+        .from('groups')
+        .select('id, name')
+        .order('name')
+
+    async function handleSubmit(data: { name: string; hobbies: string; groupId: string | null }) {
         'use server'
         const result = await createPerson(data)
         
@@ -21,6 +29,7 @@ export default function NewPerson() {
             <h1>Add New Person</h1>
                 <PersonForm 
                     onSubmit={handleSubmit}
+                    groups={groups || []} 
                 />
         </div>
     )
