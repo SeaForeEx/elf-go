@@ -9,25 +9,35 @@ type PersonFormProps = {
     initialData?: {
         name: string
         hobbies: string | null
+        group_id: string | null
     }
-    onSubmit: (data: { name: string; hobbies: string}) => Promise<void>
+    groups?: Array<{ id: string; name: string }>
+    onSubmit: (data: { name: string; hobbies: string; groupId: string | null }) => Promise<void>
 }
 
 export default function PersonForm({
     personId,
     initialData,
+    groups,
     onSubmit
 }: PersonFormProps) {
     const router = useRouter()
+
+    console.log("initial data: ", initialData)
     
     const [name, setName] = useState(initialData?.name || '')
     const [hobbies, setHobbies] = useState(initialData?.hobbies || '')
+    const [group, setGroup] = useState(initialData?.group_id || '')
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
-        await onSubmit({ name, hobbies })
+        await onSubmit({ 
+            name, 
+            hobbies, 
+            groupId: group || null
+        })
     }
 
     return (
@@ -50,6 +60,26 @@ export default function PersonForm({
                         onChange={(e) => setHobbies(e.target.value)}
                     />
                 </div>
+
+                {groups && groups.length > 0 ? (
+                    <div className={styles.field}>
+                        <label>Group:</label>
+                        <select 
+                            value={group} 
+                            onChange={(e) => setGroup(e.target.value)}
+                            className={styles.select}
+                        >
+                            <option value="">Not in a group</option>
+                            {groups?.map((g) => (
+                                <option key={g.id} value={g.id}>
+                                    {g.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                ) : ( 
+                    ''
+                )}
 
                 <div className={styles.buttonContainer}>
                     <button 

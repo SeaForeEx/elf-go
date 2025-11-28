@@ -18,11 +18,16 @@ export default async function EditPerson({
         .eq('id', id)
         .single()
 
+    const { data: groups } = await supabase
+        .from('groups')
+        .select('id, name')
+        .order('name')
+
     if (!person) {
         return <div>Person not found</div>
     }
 
-    async function handleSubmit(data: { name: string, hobbies: string}) {
+    async function handleSubmit(data: { name: string, hobbies: string; groupId: string | null }) {
         'use server'
         await updatePerson(id, data)
         redirect(`/person/${id}`)
@@ -37,6 +42,7 @@ export default async function EditPerson({
                 personId={person.id}
                 initialData={person}
                 onSubmit={handleSubmit}
+                groups={groups || []}
             />
         </div>
     )

@@ -1,15 +1,16 @@
 'use client'
 
 import { useState } from "react"
-import { deletePerson, deleteGift } from "@/app/actions"
+import { deletePerson, deleteGift, deleteGroup } from "@/app/actions"
 import styles from './DeleteButton.module.css'
 import TrashIcon from "../icons/TrashIcon"
 
 type DeleteButtonProps = {
     itemName: string
-    itemType: 'person' | 'gift'
+    itemType: 'person' | 'gift' | 'group'
     giftId?: string
     personId?: string
+    groupId?: string
 }
 
 export default function DeleteButton({
@@ -17,15 +18,25 @@ export default function DeleteButton({
     itemType,
     giftId,
     personId,
+    groupId
 }: DeleteButtonProps) {
     const [isDeleting, setIsDeleting] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
 
 
     const handleDelete = async () => {
-        const confirmMessage = itemType === 'person' 
-            ? `Are you sure you want to delete ${itemName} and all their gifts?`
-            : `Are you sure you want to delete "${itemName}"?`
+        let confirmMessage
+
+        switch (itemType) {
+            case 'person':
+                confirmMessage = `Are you sure you want to delete ${itemName} and all their gifts?`
+                break
+            case 'gift':
+                confirmMessage = `Are you sure you want to delete "${itemName}"?`
+                break
+            case 'group':
+                confirmMessage = `Are you sure you want to delete "${itemName}"? (Note: all the people in the group will NOT be deleted.)`
+        }
 
         if(!confirm(confirmMessage)) {
             return
@@ -34,11 +45,19 @@ export default function DeleteButton({
         setIsDeleting(true)
 
         let result
-        if (itemType === 'person') {
-            result = await deletePerson(personId!)
-        } else {
-            result = await deleteGift(giftId!, personId!)
+
+        switch (itemType) {
+            case 'person':
+                result = await deletePerson(personId!)
+                break
+            case 'gift':
+                result = await deleteGift(giftId!, personId!)
+                break
+            case 'group':
+                result = await deleteGroup(groupId!)
+                break
         }
+
 
         if (!result.success) {
             alert(`Error: ${result.error}`)
@@ -60,7 +79,7 @@ export default function DeleteButton({
                 <TrashIcon className={styles.icon} />
             </button>
             {showTooltip && !isDeleting && (
-                <span className={styles.tooltip}>Delete {itemType === 'person' ? 'person' : 'gift'}</span>
+                <span className={styles.tooltip}>Delete {itemType}</span>
             )}
         </div>
     )

@@ -6,24 +6,35 @@ import PencilIcon from '../icons/PencilIcon'
 import { useState } from 'react'
 
 type EditButtonProps = {
-    itemType: 'person' | 'gift'
+    itemType: 'person' | 'gift' | 'group'
     personId?: string
     giftId?: string
+    groupId?: string
 }
 
 export default function EditButton({ 
     itemType,
     personId,
-    giftId 
+    giftId,
+    groupId 
 }: EditButtonProps) {
     const router = useRouter()
     const [showTooltip, setShowTooltip] = useState(false)
 
     const handleEdit = async () => {
-        if (itemType === 'person') {
-            router.push(`/person/${personId}/edit`)
-        } else {
-            router.push(`/gift/${giftId}/edit`)
+        switch (itemType) {
+            case 'person':
+                router.push(`/person/${personId}/edit`)
+                break
+            case 'gift':
+                router.push(`/gift/${giftId}/edit`)
+                break
+            case 'group':
+                router.push(`/group/${groupId}/edit`)
+                break
+            default: 
+                router.push('/')
+                break
         }
     }
 
@@ -40,7 +51,7 @@ export default function EditButton({
                 <PencilIcon className={styles.icon} />
             </button>
             {showTooltip && (
-                <span className={styles.tooltip}>Edit {itemType === 'person' ? 'person' : 'gift'}</span>
+                <span className={styles.tooltip}>Edit {itemType}</span>
             )}
         </div>
     )
