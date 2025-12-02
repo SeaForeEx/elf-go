@@ -1,5 +1,5 @@
 import { updatePerson } from "@/app/actions"
-import PersonForm from "@/components/PersonForm/PersonForm"
+import PersonForm from "@/components/forms/PersonForm/PersonForm"
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import styles from './page.module.css'

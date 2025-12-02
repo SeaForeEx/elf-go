@@ -209,6 +209,22 @@ export async function deleteGroup(groupId: string) {
     redirect('/')
 }
 
+export async function addMembersToGroup(groupId: string, personIds: string[]) {
+    const supabase = await createClient()
+
+    const { error } = await supabase
+        .from('people')
+        .update({ group_id: groupId })
+        .in('id', personIds)
+
+    if (error) {
+        return { success: false, error: error.message}
+    }
+
+    revalidatePath(`/group/${groupId}`)
+    return { success: true }
+}
+
 // PROFILE ACTIONS
 
 export async function getProfile() {

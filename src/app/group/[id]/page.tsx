@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import EditButton from '@/components/EditButton/EditButton'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import Link from 'next/link'
+import UserPlusButton from '@/components/UserPlusButton/UserPlusButton'
 
 export default async function Group({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -21,10 +22,15 @@ export default async function Group({ params }: { params: Promise<{ id: string }
         return <div>Group not found</div>
     }
 
+    console.log("first group id: ", group.id)
+
     return (
         <div className={styles.container}>
             <h2 className={styles.subtitle}>
                 {group.name}
+                <UserPlusButton 
+                    groupId={group.id} 
+                />
                 <EditButton 
                     itemType='group'
                     groupId={group.id} 

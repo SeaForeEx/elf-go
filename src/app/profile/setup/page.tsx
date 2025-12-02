@@ -1,6 +1,6 @@
 import { updateProfile } from "@/app/actions";
 import styles from './page.module.css'
-import ProfileForm from "@/components/ProfileForm/ProfileForm";
+import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
 import { redirect } from "next/navigation";
 
 export default function ProfileSetup() {

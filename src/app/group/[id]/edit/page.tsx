@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import styles from './page.module.css'
 import { updateGroup } from '@/app/actions'
 import { redirect } from 'next/navigation'
-import GroupForm from '@/components/GroupForm/GroupForm'
+import GroupForm from '@/components/forms/GroupForm/GroupForm'
 
 export default async function EditGroup({
     params

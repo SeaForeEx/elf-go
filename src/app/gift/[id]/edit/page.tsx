@@ -1,5 +1,5 @@
 import { updateGift } from "@/app/actions"
-import GiftForm from "@/components/GiftForm/GiftForm"
+import GiftForm from "@/components/forms/GiftForm/GiftForm"
 import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import styles from './page.module.css'
