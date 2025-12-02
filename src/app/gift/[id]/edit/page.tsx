@@ -1,7 +1,6 @@
 import { updateGift } from "@/app/actions"
 import GiftForm from "@/components/forms/GiftForm/GiftForm"
 import { createClient } from "@/lib/supabase/server"
-import { redirect } from "next/navigation"
 import styles from './page.module.css'
 
 export default async function EditGift({
@@ -31,7 +30,6 @@ export default async function EditGift({
     async function handleSubmit(data: { name: string, price: number, status: string}) {
         'use server'
         await updateGift(id, data)
-        redirect(`/gift/${id}`)
     }
 
     return (

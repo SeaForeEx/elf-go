@@ -15,13 +15,7 @@ export default async function NewPerson() {
 
     async function handleSubmit(data: { name: string; hobbies: string; groupId: string | null }) {
         'use server'
-        const result = await createPerson(data)
-        
-        if (result.success && result.personId) {
-            redirect(`/person/${result.personId}`)
-        } else {
-            console.error(result.error)
-        }
+        await createPerson(data)
     }
 
     return (

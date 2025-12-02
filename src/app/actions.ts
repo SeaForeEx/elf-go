@@ -26,11 +26,11 @@ export async function createPerson(data: { name: string; hobbies: string; groupI
         .single()
     
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
     
     revalidatePath('/')
-    return { success: true, personId: newPerson.id }
+    redirect(`/person/${newPerson.id}`)
 }
 
 export async function updatePerson(
@@ -50,13 +50,12 @@ export async function updatePerson(
         .eq('id', personId)
     
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
     
     revalidatePath(`/person/${personId}`)
     revalidatePath('/')
-    
-    return { success: true }
+    redirect(`/person/${personId}`)
 }
 
 export async function deletePerson(personId: string) {
@@ -68,7 +67,7 @@ export async function deletePerson(personId: string) {
         .eq('id', personId)
 
     if (error) {
-        return { success: false, error: error.message}
+        throw new Error(error.message)
     }
 
     revalidatePath('/')
@@ -95,11 +94,11 @@ export async function createGift(
         .single()
 
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath(`/person/${personId}`)
-    return { success: true }
+    redirect(`/person/${personId}`)
 }
 
 export async function updateGift(
@@ -118,11 +117,11 @@ export async function updateGift(
         .eq('id', giftId)
 
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath(`/gift/${giftId}`)
-    return { success: true }
+    redirect(`/gift/${giftId}`)
 }
 
 export async function deleteGift(giftId: string, personId?: string) {
@@ -134,12 +133,11 @@ export async function deleteGift(giftId: string, personId?: string) {
         .eq('id', giftId)
 
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath(`/person/${personId}`)
-    
-    return { success: true }
+    redirect(`/person/${personId}`)
 }
 
 // GROUP ACTIONS
@@ -162,11 +160,11 @@ export async function createGroup(data: { name: string }) {
         .single()
 
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath('/')
-    return { success: true, groupId: newGroup.id}
+    redirect(`/group/${newGroup.id}`)
 }
 
 export async function updateGroup(
@@ -184,13 +182,12 @@ export async function updateGroup(
         .eq('id', groupId)
 
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath(`/person/${groupId}`)
     revalidatePath('/')
-
-    return { success: true }
+    redirect(`/group/${groupId}`)
 }
 
 export async function deleteGroup(groupId: string) {
@@ -218,11 +215,11 @@ export async function addMembersToGroup(groupId: string, personIds: string[]) {
         .in('id', personIds)
 
     if (error) {
-        return { success: false, error: error.message}
+        throw new Error(error.message)
     }
 
     revalidatePath(`/group/${groupId}`)
-    return { success: true }
+    redirect(`/group/${groupId}`)
 }
 
 // PROFILE ACTIONS
@@ -248,7 +245,7 @@ export async function getProfile() {
     return { success: true, profile }
 }
 
-export async function updateProfile(data: { name: string; budget: number }) {
+export async function updateProfile(data: { name: string; budget: number }, redirectTo: string) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
@@ -268,10 +265,10 @@ export async function updateProfile(data: { name: string; budget: number }) {
         })
 
     if (error) {
-        return { success: false, error: error.message }
+        throw new Error(error.message)
     }
 
     revalidatePath('/')
     revalidatePath('/profile')
-    return { success: true }
+    redirect(redirectTo)
 }

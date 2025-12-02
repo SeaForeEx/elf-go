@@ -16,11 +16,7 @@ export default async function EditProfile() {
 
     async function handleSubmit(data: { name: string; budget: number }) {
         'use server'
-        const result = await updateProfile(data)
-
-        if (result.success) {
-            redirect('/profile')
-        }
+        await updateProfile(data, '/profile')
     }
 
     return (

@@ -23,7 +23,6 @@ export default function DeleteButton({
     const [isDeleting, setIsDeleting] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
 
-
     const handleDelete = async () => {
         let confirmMessage
 
@@ -44,23 +43,20 @@ export default function DeleteButton({
 
         setIsDeleting(true)
 
-        let result
-
-        switch (itemType) {
-            case 'person':
-                result = await deletePerson(personId!)
-                break
-            case 'gift':
-                result = await deleteGift(giftId!, personId!)
-                break
-            case 'group':
-                result = await deleteGroup(groupId!)
-                break
-        }
-
-
-        if (!result.success) {
-            alert(`Error: ${result.error}`)
+        try {
+            switch (itemType) {
+                case 'person':
+                    await deletePerson(personId!)
+                    break
+                case 'gift':
+                    await deleteGift(giftId!, personId!)
+                    break
+                case 'group':
+                    await deleteGroup(groupId!)
+                    break
+            }
+        } catch (error) {
+            alert(`Error: ${error instanceof Error ? error.message : 'Failed to delete'}`)
             setIsDeleting(false)
         }
     }
