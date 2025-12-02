@@ -1,18 +1,11 @@
 import { createGroup } from '@/app/actions';
 import styles from './page.module.css';
-import { redirect } from 'next/navigation';
 import GroupForm from '@/components/forms/GroupForm/GroupForm';
 
 export default function NewGroup() {
     async function handleSubmit(data: { name: string }) {
         'use server'
-        const result = await createGroup(data)
-
-        if (result.success && result.groupId) {
-            redirect(`/group/${result.groupId}`)
-        } else {
-            console.error(result.error)
-        }
+        await createGroup(data)
     }
 
     return (

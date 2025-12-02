@@ -34,15 +34,12 @@ export default function AddMemberForm({
     const handleAddMember = async (e: React.FormEvent) => {
         setIsSubmitting(true)
 
-        const result = await addMembersToGroup(groupId!, selectedPeople)
-
-        if (!result.success) {
-            console.error('Error adding members: ', result.error)
+        try {
+            await addMembersToGroup(groupId!, selectedPeople)
+        } catch (error) {
+            console.error('Error adding members:', error)
             setIsSubmitting(false)
-            return
         }
-
-        router.push(`/group/${groupId}`)
     }
 
     return (

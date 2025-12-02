@@ -2,7 +2,6 @@ import styles from './page.module.css';
 import { createGift } from "@/app/actions";
 import GiftForm from '@/components/forms/GiftForm/GiftForm';
 import { createClient } from '@/lib/supabase/server';
-import { redirect } from "next/navigation";
 
 export default async function NewGift({
     searchParams
@@ -30,7 +29,6 @@ export default async function NewGift({
     async function handleSubmit(data: { name: string; price: number; status: string }) {
         'use server'
         await createGift(personId!, data)
-        redirect(`/person/${personId}`)
     }
 
     return (

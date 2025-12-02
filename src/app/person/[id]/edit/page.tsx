@@ -30,7 +30,6 @@ export default async function EditPerson({
     async function handleSubmit(data: { name: string, hobbies: string; groupId: string | null }) {
         'use server'
         await updatePerson(id, data)
-        redirect(`/person/${id}`)
     }
 
     return (

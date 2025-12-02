@@ -4,13 +4,9 @@ import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
 import { redirect } from "next/navigation";
 
 export default function ProfileSetup() {
-    async function handleSubmit(data: { name: string; budget: number}) {
+    async function handleSubmit(data: { name: string; budget: number }) {
         'use server'
-        const result = await updateProfile(data)
-
-        if (result.success) {
-            redirect('/')
-        }
+        await updateProfile(data, '/')
     }
 
     return (
