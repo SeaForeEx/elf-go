@@ -1,7 +1,7 @@
 import { createGroup } from '@/app/actions';
 import styles from './page.module.css';
 import { redirect } from 'next/navigation';
-import GroupForm from '@/components/GroupForm/GroupForm';
+import GroupForm from '@/components/forms/GroupForm/GroupForm';
 
 export default function NewGroup() {
     async function handleSubmit(data: { name: string }) {

@@ -2,7 +2,7 @@ import { updateProfile } from "@/app/actions";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import styles from './page.module.css'
-import ProfileForm from "@/components/ProfileForm/ProfileForm";
+import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
 
 export default async function EditProfile() {
     const supabase = await createClient()
