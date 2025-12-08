@@ -22,8 +22,6 @@ export default async function Group({ params }: { params: Promise<{ id: string }
         return <div>Group not found</div>
     }
 
-    console.log("first group id: ", group.id)
-
     return (
         <div className={styles.container}>
             <h2 className={styles.subtitle}>

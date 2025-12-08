@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 // PERSON ACTIONS
 
-export async function createPerson(data: { name: string; hobbies: string; groupId: string | null }) {
+export async function createPerson(data: { name: string; hobbies: string; address: string | null; groupId: string | null }) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
@@ -19,6 +19,7 @@ export async function createPerson(data: { name: string; hobbies: string; groupI
         .insert({
             name: data.name,
             hobbies: data.hobbies,
+            address: data.address,
             group_id: data.groupId,
             user_id: user.id
         })
@@ -35,7 +36,7 @@ export async function createPerson(data: { name: string; hobbies: string; groupI
 
 export async function updatePerson(
     personId: string, 
-    data: { name: string; hobbies: string; groupId: string | null }
+    data: { name: string; hobbies: string; address: string | null; groupId: string | null }
 )   
 {
     const supabase = await createClient()
@@ -45,6 +46,7 @@ export async function updatePerson(
         .update({
             name: data.name,
             hobbies: data.hobbies,
+            address: data.address,
             group_id: data.groupId
         })
         .eq('id', personId)
