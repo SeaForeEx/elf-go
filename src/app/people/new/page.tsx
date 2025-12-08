@@ -13,7 +13,7 @@ export default async function NewPerson() {
         .select('id, name')
         .order('name')
 
-    async function handleSubmit(data: { name: string; hobbies: string; groupId: string | null }) {
+    async function handleSubmit(data: { name: string; hobbies: string; address: string | null; groupId: string | null }) {
         'use server'
         await createPerson(data)
     }
