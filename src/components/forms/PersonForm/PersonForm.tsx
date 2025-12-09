@@ -3,16 +3,18 @@
 import { useState } from "react"
 import styles from './PersonForm.module.css'
 import { useRouter } from "next/navigation"
+import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete"
 
 type PersonFormProps = {
     personId?: string
     initialData?: {
         name: string
         hobbies: string | null
+        address: string | null
         group_id: string | null
     }
     groups?: Array<{ id: string; name: string }>
-    onSubmit: (data: { name: string; hobbies: string; groupId: string | null }) => Promise<void>
+    onSubmit: (data: { name: string; hobbies: string; address: string | null; groupId: string | null }) => Promise<void>
 }
 
 export default function PersonForm({
@@ -22,11 +24,10 @@ export default function PersonForm({
     onSubmit
 }: PersonFormProps) {
     const router = useRouter()
-
-    console.log("initial data: ", initialData)
     
     const [name, setName] = useState(initialData?.name || '')
     const [hobbies, setHobbies] = useState(initialData?.hobbies || '')
+    const [address, setAddress] = useState(initialData?.address || '')
     const [group, setGroup] = useState(initialData?.group_id || '')
     const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -35,7 +36,8 @@ export default function PersonForm({
         setIsSubmitting(true)
         await onSubmit({ 
             name, 
-            hobbies, 
+            hobbies,
+            address, 
             groupId: group || null
         })
     }
@@ -48,6 +50,7 @@ export default function PersonForm({
                     <input 
                         type="text"
                         value={name}
+                        placeholder="John Smith"
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
@@ -57,7 +60,16 @@ export default function PersonForm({
                     <input 
                         type="text"
                         value={hobbies}
+                        placeholder="Books, games, etc."
                         onChange={(e) => setHobbies(e.target.value)}
+                    />
+                </div>
+
+                <div className={styles.field}>
+                    <label>Address:</label>
+                    <AddressAutocomplete 
+                        onSelect={(data: string) => setAddress(data)}
+                        initialValue={initialData?.address || ''} 
                     />
                 </div>
 

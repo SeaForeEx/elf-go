@@ -27,7 +27,7 @@ export default async function EditPerson({
         return <div>Person not found</div>
     }
 
-    async function handleSubmit(data: { name: string, hobbies: string; groupId: string | null }) {
+    async function handleSubmit(data: { name: string, hobbies: string; address: string | null; groupId: string | null }) {
         'use server'
         await updatePerson(id, data)
     }
