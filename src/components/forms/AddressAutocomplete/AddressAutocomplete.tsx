@@ -14,12 +14,28 @@ export default function AddressAutocomplete({
 }: AddressAutocompleteProps) {
     const [inputValue, setInputValue] = useState(initialValue);
     const [suggestions, setSuggestions] = useState<string[]>([])
+    const [userCountry, setUserCountry] = useState('us')  // Add this
+
 
     const timeoutRef = useRef<NodeJS.Timeout | null>(null)
     const justSelectedRef = useRef(false)
 
     const MIN_ADDRESS_LENGTH = 3
     const DEBOUNCE_DELAY = 300
+
+    // Detect user's country from their IP address
+    useEffect(() => {
+        const apiKey = process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY
+        fetch(`https://api.geoapify.com/v1/ipinfo?apiKey=${apiKey}`)
+            .then(res => res.json())
+            .then(data => {
+                setUserCountry(data.country.iso_code.toLowerCase())
+            })
+            .catch(() => {
+                // Default to US if detection fails
+                setUserCountry('us')
+            })
+    }, [])  // Run once on mount
 
     useEffect(() => {
         // Skip API call until user modifies the initial value
@@ -43,7 +59,7 @@ export default function AddressAutocomplete({
         const timeoutId = setTimeout(() => {
             // Build the API request URL
             const apiKey = process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY  
-            const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputValue)}&format=json&limit=5&bias=proximity:-86.62,36.11&apiKey=${apiKey}`
+            const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputValue)}&format=json&limit=5&bias=countrycode:${userCountry}&apiKey=${apiKey}`
             // Make the API call
             fetch(url)
                 .then(response => {
