@@ -19,6 +19,10 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
         `)
         .eq('id', id)
         .single()
+    
+    const capitalizedGiftStatus = gift.status !== 'not purchased' ? 
+        gift.status.charAt(0).toUpperCase() + gift.status.slice(1) :
+        'Not Purchased'
 
     if (error || !gift) {
         return <div>Gift not found</div>
@@ -42,11 +46,11 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
                 Price: {' '}
                 ${gift.price ? Number(gift.price).toFixed(2) : '0.00'}
                 <br /><br />
-                Status: {' '}
-                {gift.status}
-                <br /><br />
                 Occasion: {' '}
-                Holiday
+                {gift.occasion}
+                <br /><br />
+                Status: {' '}
+                {capitalizedGiftStatus}
             </h3>
             <h1>
                 <Link href={`/person/${gift.people.id}`} className={styles.backLink}>
