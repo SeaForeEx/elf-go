@@ -80,7 +80,7 @@ export async function deletePerson(personId: string) {
 
 export async function createGift(
     personId: string,
-    data: { name: string; price: number; status: string }
+    data: { name: string; occasion: string; price: number; status: string }
 ) { 
     const supabase = await createClient()
 
@@ -89,6 +89,7 @@ export async function createGift(
         .insert({
             person_id: personId,
             name: data.name,
+            occasion: data.occasion,
             price: data.price,
             status: data.status
         })
@@ -105,7 +106,7 @@ export async function createGift(
 
 export async function updateGift(
     giftId: string,
-    data: { name: string; price: number; status: string }
+    data: { name: string; occasion: string; price: number; status: string }
 ) {
     const supabase = await createClient()
 
@@ -113,6 +114,7 @@ export async function updateGift(
         .from('gifts')
         .update({
             name: data.name,
+            occasion: data.occasion,
             price: data.price,
             status: data.status
         })
