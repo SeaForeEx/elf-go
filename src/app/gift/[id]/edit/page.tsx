@@ -27,7 +27,7 @@ export default async function EditGift({
         return <div>Gift not found</div>
     }
 
-    async function handleSubmit(data: { name: string, price: number, status: string}) {
+    async function handleSubmit(data: { name: string, occasion: string, price: number, status: string}) {
         'use server'
         await updateGift(id, data)
     }
