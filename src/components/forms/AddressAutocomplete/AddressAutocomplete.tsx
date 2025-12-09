@@ -43,8 +43,7 @@ export default function AddressAutocomplete({
         const timeoutId = setTimeout(() => {
             // Build the API request URL
             const apiKey = process.env.NEXT_PUBLIC_GEOAPIFY_API_KEY  
-            const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputValue)}&format=json&limit=5&apiKey=${apiKey}`;
-    
+            const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputValue)}&format=json&limit=5&bias=proximity:-86.62,36.11&apiKey=${apiKey}`
             // Make the API call
             fetch(url)
                 .then(response => {
@@ -55,8 +54,12 @@ export default function AddressAutocomplete({
                     }
                 })
                 .then(data => {
-                    // Extract the formatted addresses from the API response
-                    const addresses = data.results?.map((result: any) => result.formatted) || [];
+                    // Extract the formatted addresses from the API response with abbreviated Country Code
+                    const addresses = data.results?.map((result: any) => {
+                        const countryCode = result.country_code?.toUpperCase() || ''
+                        const addressWithoutCountry = result.formatted.replace(/, [^,]+$/, '')
+                        return countryCode ? `${addressWithoutCountry}, ${countryCode}` : result.formatted
+                    }) || [];
                     
                     // Update state with the suggestions, which triggers re-render and shows dropdown
                     setSuggestions(addresses)
