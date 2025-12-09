@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "ELF GO!",
     description: "Christmas Gift Organizer",
+    icons: {
+        icon: '/favicon.svg',
+    }
 };
 
 export default function RootLayout({
