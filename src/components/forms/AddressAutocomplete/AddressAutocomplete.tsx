@@ -22,6 +22,12 @@ export default function AddressAutocomplete({
     const DEBOUNCE_DELAY = 300
 
     useEffect(() => {
+        if (inputValue.length === 0) {
+            setInputValue('')
+            onSelect(inputValue)
+            return
+        }
+
         // Skip API call until user modifies the initial value
         if (initialValue === inputValue) {
             return

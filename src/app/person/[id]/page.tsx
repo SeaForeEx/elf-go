@@ -43,7 +43,7 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                 {person.hobbies || 'No hobbies listed'}
                 <br /><br />
                 Address: {' '}
-                {person.address || 'N/A'}
+                {person.address || 'No address listed'}
                 <br /><br />
                 Group: {' '}
                 {person.groups?.name ? (
