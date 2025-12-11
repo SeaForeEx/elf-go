@@ -115,7 +115,7 @@ export default async function Home() {
             }
 
             <h2 className={styles.subtitle}>
-                Other People
+                {groups && groups.length > 0 ? 'Other People' : 'People'}
                 <CreateButton itemType={'person'} />
             </h2>
 
