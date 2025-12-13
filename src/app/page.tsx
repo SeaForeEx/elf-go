@@ -7,24 +7,25 @@ import CreateButton from '@/components/CreateButton/CreateButton'
 
 export default async function Home() {
     const supabase = await createClient()
+
     const { data: { user }} = await supabase.auth.getUser()
   
-    const { data: people, error: peopleError } = await supabase
+    const { data: people } = await supabase
         .from('people')
         .select('id, name, group_id')
         .order('name')
 
-    const { data: gifts, error: giftError} = await supabase
+    const { data: gifts } = await supabase
         .from('gifts')
         .select('price, status')
 
-    const { data: profile, error: profileError } = await supabase
+    const { data: profile } = await supabase
         .from('profiles')
         .select('budget')
         .eq('id', user?.id)
         .single()
 
-    const { data: groups, error: groupError } = await supabase
+    const { data: groups } = await supabase
         .from('groups')
         .select('id, name')
         .order('name')
@@ -50,22 +51,6 @@ export default async function Home() {
 
     const isActualNegative = remainingActual < 0
     const isPlannedNegative = remainingPlanned < 0 
-    
-    if (peopleError) {
-        return <div>Error: {peopleError.message}</div>
-    }
-
-    if (giftError) {
-        return <div>Error: {giftError.message}</div>
-    }
-
-    if (profileError) {
-        return <div>Error: {profileError.message}</div>
-    }
-
-    if (groupError) {
-        return <div>Error: {groupError.message}</div>
-    }
 
     return (
         <div className={styles.container}>
