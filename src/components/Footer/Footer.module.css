@@ -13,6 +13,6 @@
 .countdown {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #16a34a;
+    color: var(--foreground);
     margin: 0;
 }
