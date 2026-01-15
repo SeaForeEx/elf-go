@@ -1,11 +1,11 @@
 :root {
     --background: #f0fdf4;
+    --background-secondary: #fef2f2;
     --foreground: #1f2937;
     --primary: #16a34a;
-    --primary-hover: #15803d;
-    --secondary: #dc2626;
     --border: #d1d5db;
     --card-bg: #ffffff;
+    --tooltip-bg: #1f2937;
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
@@ -22,7 +22,7 @@ body {
     padding: 0;
     overflow: hidden;
     color: var(--foreground);
-    background: linear-gradient(to bottom right, #f0fdf4, #fef2f2);
+    background: linear-gradient(to bottom right, var(--background), var(--background-secondary));
     background-attachment: fixed;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

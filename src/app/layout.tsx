@@ -4,6 +4,7 @@ import "./globals.css";
 import styles from "./layout.module.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import MonthlyTheme from "@/components/MonthlyTheme/MonthlyTheme";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: "ELF GO!",
-    description: "Christmas Gift Organizer",
+    description: "Holiday Gift Organizer",
     icons: {
         icon: '/favicon.svg',
     }
@@ -31,6 +32,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
+            <MonthlyTheme />
             <div className={styles.wrapper}>
                 <Header />
                 <main className={styles.main}>

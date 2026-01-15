@@ -15,7 +15,7 @@
 .title {
     font-size: 2rem;
     font-weight: bold;
-    color: #16a34a;
+    color: var(--foreground);
     margin: 0;
 }
 
@@ -23,15 +23,4 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-}
-
-.profileLink {
-    color: #16a34a;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.profileLink:hover {
-    color: #15803d;
 }
