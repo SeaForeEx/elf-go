@@ -1,6 +1,5 @@
 'use client'
 
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from './ProfileButton.module.css'
@@ -9,7 +8,6 @@ import ProfileIcon from "../icons/ProfileIcon";
 
 export default function ProfileButton() {
     const router = useRouter()
-    const supabase = createClient()
 
     const [showTooltip, setShowTooltip] = useState(false)
 

@@ -61,7 +61,7 @@ export default function GiftForm({
                     >
                         <option value="Christmas">Christmas</option>
                         <option value="Birthday">Birthday</option>
-                        <option value="Hannukah">Hannukah</option>
+                        <option value="Hanukkah">Hanukkah</option>
                         <option value="Mother's Day">Mother&apos;s Day</option>
                         <option value="Father's Day">Father&apos;s Day</option>
                         <option value="Valentine's Day">Valentine&apos;s Day</option>
