@@ -1,3 +1,5 @@
+import { HebrewCalendar } from "@hebcal/core"
+
 const today = new Date()
 
 function getMothersDayDate(year: number) {
@@ -24,6 +26,16 @@ function getThanksgivingDate(year: number) {
     return thanksgiving
 }
 
+function getChanukahDate(year: number) {
+    const events = HebrewCalendar.calendar({
+        year: year,
+    });
+
+    const hanukkah = events.find(ev => ev.getDesc().startsWith('Chanukah: 1'));
+
+    return hanukkah?.greg();
+}
+
 export const monthlyOccasions = [
     {
         date: new Date(today.getFullYear(), 1, 14),
@@ -48,6 +60,12 @@ export const monthlyOccasions = [
         name: 'Thanksgiving',
         emoji: '🦃',
         daysUntil: Math.ceil((Number(getThanksgivingDate(today.getFullYear())) - Number(today)) / (1000 * 60 * 60 * 24))
+    },
+    {
+        date: getChanukahDate(today.getFullYear()),
+        name: 'Chanukah',
+        emoji: '🕎',
+        daysUntil: Math.ceil((Number(getChanukahDate(today.getFullYear())) - Number(today)) / (1000 * 60 * 60 * 24))
     },
     {
         date: new Date(today.getFullYear(), 11, 25),
