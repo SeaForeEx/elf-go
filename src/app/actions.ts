@@ -101,7 +101,7 @@ export async function createGift(
     }
 
     revalidatePath(`/person/${personId}`)
-    redirect(`/person/${personId}`)
+    redirect(`/gift/${newGift.id}`)
 }
 
 export async function updateGift(
