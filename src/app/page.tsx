@@ -4,31 +4,16 @@ import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
+import { getProfile } from '@/lib/queries/profile'
+import { getGifts } from '@/lib/queries/gifts'
+import { getPeople } from '@/lib/queries/people'
+import { getGroups } from '@/lib/queries/groups'
 
 export default async function Home() {
-    const supabase = await createClient()
-
-    const { data: { user }} = await supabase.auth.getUser()
-  
-    const { data: people } = await supabase
-        .from('people')
-        .select('id, name, group_id')
-        .order('name')
-
-    const { data: gifts } = await supabase
-        .from('gifts')
-        .select('price, status')
-
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('budget')
-        .eq('id', user?.id)
-        .single()
-
-    const { data: groups } = await supabase
-        .from('groups')
-        .select('id, name')
-        .order('name')
+    const { people } = await getPeople()
+    const { gifts } = await getGifts()
+    const { profile } = await getProfile()
+    const { groups } = await getGroups()
 
     const hasBudget = profile?.budget != null && profile?.budget > 0
     let remainingActual = 0

@@ -1,4 +1,4 @@
-import { updateGift } from "@/app/actions"
+import { updateGift } from "@/lib/actions/gifts"
 import GiftForm from "@/components/forms/GiftForm/GiftForm"
 import { createClient } from "@/lib/supabase/server"
 import styles from './page.module.css'

@@ -1,7 +1,6 @@
-import { updateProfile } from "@/app/actions";
+import { updateProfile } from '@/lib/actions/profile';
 import styles from './page.module.css'
 import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
-import { redirect } from "next/navigation";
 
 export default function ProfileSetup() {
     async function handleSubmit(data: { name: string; budget: number }) {
@@ -12,7 +11,7 @@ export default function ProfileSetup() {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>Complete Your Profile</h1>
-            <p className={styles.subtitle}>Let's get started with your Christmas gift tracker!</p>
+            <p className={styles.subtitle}>Let&pos;s get started with your Christmas gift tracker!</p>
             <ProfileForm onSubmit={handleSubmit} />
         </div>
     )

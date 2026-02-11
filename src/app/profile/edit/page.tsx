@@ -1,6 +1,5 @@
-import { updateProfile } from "@/app/actions";
+import { updateProfile } from "@/lib/actions/profile";
 import { createClient } from "@/lib/supabase/server";
-import { redirect } from "next/navigation";
 import styles from './page.module.css'
 import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
 

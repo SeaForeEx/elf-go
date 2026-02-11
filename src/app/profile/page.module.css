@@ -10,7 +10,7 @@
 .title {
     font-size: 2rem;
     font-weight: bold;
-    color: #16a34a;
+    color: var(--foreground);
     margin-bottom: 2rem;
     text-align: center;
 }
@@ -38,6 +38,10 @@
 
 .emailRow {
     justify-content: center;
+}
+
+.email {
+    color: var(--primary);
 }
 
 .label {
