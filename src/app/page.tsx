@@ -1,4 +1,3 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
