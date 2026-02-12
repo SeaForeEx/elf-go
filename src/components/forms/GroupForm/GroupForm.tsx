@@ -3,14 +3,7 @@
 import { useRouter } from 'next/navigation'
 import styles from './GroupForm.module.css'
 import { useState } from 'react'
-
-type GroupFormProps = {
-    groupId?: string
-    initialData?: {
-        name: string
-    }
-    onSubmit: (data: { name: string }) => Promise<void>
-}
+import { GroupFormProps } from '@/lib/types/types'
 
 export default function GroupForm({
     groupId,

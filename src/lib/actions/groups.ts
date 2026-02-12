@@ -65,7 +65,7 @@ export async function deleteGroup(groupId: string) {
     }
 
     revalidatePath('/')
-    redirect('/')
+    return { success: true }
 }
 
 export async function addMembersToGroup(groupId: string, personIds: string[]) {

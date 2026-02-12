@@ -68,5 +68,6 @@ export async function deleteGift(giftId: string, personId?: string) {
     }
 
     revalidatePath(`/person/${personId}`)
-    redirect(`/person/${personId}`)
+    return { success: true }
+
 }

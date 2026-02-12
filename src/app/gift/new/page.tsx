@@ -2,6 +2,7 @@ import styles from './page.module.css';
 import { createGift } from '@/lib/actions/gifts';
 import GiftForm from '@/components/forms/GiftForm/GiftForm';
 import { getPerson } from '@/lib/queries/people';
+import { GiftFormData } from '@/lib/types/types';
 
 export default async function NewGift({
     searchParams
@@ -16,7 +17,7 @@ export default async function NewGift({
     
     const { person } = await getPerson(personId)
 
-    async function handleSubmit(data: { name: string; occasion: string, price: number; status: string }) {
+    async function handleSubmit(data: GiftFormData) {
         'use server'
         await createGift(personId!, data)
     }

@@ -4,16 +4,7 @@ import { useRouter } from 'next/navigation'
 import styles from './AddMemberForm.module.css'
 import { useState } from 'react'
 import { addMembersToGroup } from '@/lib/actions/groups'
-
-type Person = {
-    id: string
-    name: string
-}
-
-type AddMemberFormProps = {
-    groupId?: string
-    people: Person[]
-}
+import { AddMemberFormProps } from '@/lib/types/types'
 
 export default function AddMemberForm({
     groupId,
@@ -31,7 +22,7 @@ export default function AddMemberForm({
         )
     }
 
-    const handleAddMember = async (e: React.FormEvent) => {
+    const handleAddMember = async () => {
         setIsSubmitting(true)
 
         try {
