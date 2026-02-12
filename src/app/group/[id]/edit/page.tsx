@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import styles from './page.module.css'
-import { updateGroup } from '@/app/actions'
+import { updateGroup } from '@/lib/actions/groups'
 import GroupForm from '@/components/forms/GroupForm/GroupForm'
 
 export default async function EditGroup({

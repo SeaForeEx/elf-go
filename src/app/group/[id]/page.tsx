@@ -4,6 +4,7 @@ import EditButton from '@/components/EditButton/EditButton'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import Link from 'next/link'
 import UserPlusButton from '@/components/UserPlusButton/UserPlusButton'
+import { Person } from '@/lib/types/types'
 
 export default async function Group({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
@@ -42,7 +43,7 @@ export default async function Group({ params }: { params: Promise<{ id: string }
 
             {group.people && group.people.length > 0 ? (
                 <ul className={styles.groupList}>
-                    {group.people?.map((person: any) => (
+                    {group.people?.map((person: Person) => (
                         <li 
                             key={person.id} 
                             className={styles.groupListItem}

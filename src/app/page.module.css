@@ -4,15 +4,6 @@
     flex-direction: column;
 }
   
-.title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #16a34a;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-  
 .subtitle {
     font-size: 1.75rem;
     font-weight: 600;
@@ -20,8 +11,7 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid;
-    border-bottom-color: var(--foreground);
+    border-bottom: 2px solid var(--foreground);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -128,6 +118,6 @@
 
 @media (max-width: 400px) {
     .budgetPrice {
-        font-size: 24px; /* Down from 28px */
+        font-size: 24px; 
     }
 }

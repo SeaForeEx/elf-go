@@ -1,32 +1,16 @@
-import { createClient } from "@/lib/supabase/server"
 import styles from './page.module.css'
 import Link from "next/link"
 import EditButton from "@/components/EditButton/EditButton"
 import DeleteButton from "@/components/DeleteButton/DeleteButton"
+import { getGift } from "@/lib/queries/gifts"
 
 export default async function Gift({ params }: { params: Promise<{ id: string }>}) {
     const { id } = await params
-    const supabase = await createClient()
-
-    const { data: gift, error } = await supabase
-        .from('gifts')
-        .select(`
-            *,
-            people (
-                name,
-                id
-            )
-        `)
-        .eq('id', id)
-        .single()
+    const { gift } = await getGift(id)
     
     const capitalizedGiftStatus = gift.status !== 'not purchased' ? 
         gift.status.charAt(0).toUpperCase() + gift.status.slice(1) :
         'Not Purchased'
-
-    if (error || !gift) {
-        return <div>Gift not found</div>
-    }
 
     return (
         <div className={styles.container}>

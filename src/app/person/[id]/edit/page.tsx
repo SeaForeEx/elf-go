@@ -1,7 +1,6 @@
-import { updatePerson } from "@/app/actions"
+import { updatePerson } from "@/lib/actions/people"
 import PersonForm from "@/components/forms/PersonForm/PersonForm"
 import { createClient } from "@/lib/supabase/server"
-import { redirect } from "next/navigation"
 import styles from './page.module.css'
 
 export default async function EditPerson({

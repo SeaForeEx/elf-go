@@ -1,9 +1,7 @@
 import styles from './page.module.css';
-import { createPerson } from "@/app/actions";
+import { createPerson } from '@/lib/actions/people';
 import PersonForm from '@/components/forms/PersonForm/PersonForm';
 import { createClient } from '@/lib/supabase/server';
-import { redirect } from "next/navigation";
-
 
 export default async function NewPerson() {
     const supabase = await createClient()

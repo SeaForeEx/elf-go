@@ -21,13 +21,13 @@ export default function CreateButton({
     const handleSubmit = async () => {
         switch(itemType) {
             case 'person':
-                router.push(`/people/new`)
+                router.push(`/person/new`)
                 break
             case 'gift':
-                router.push(`/gifts/new?personId=${personId}`)
+                router.push(`/gift/new?personId=${personId}`)
                 break
             case 'group':
-                router.push(`/groups/new`)
+                router.push(`/group/new`)
                 break
             default:
                 router.push('/')

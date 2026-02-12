@@ -1,7 +1,9 @@
 'use client'
 
 import { useState } from "react"
-import { deletePerson, deleteGift, deleteGroup } from "@/app/actions"
+import { deleteGift } from "@/lib/actions/gifts"
+import { deleteGroup } from "@/lib/actions/groups"
+import { deletePerson } from "@/lib/actions/people"
 import styles from './DeleteButton.module.css'
 import TrashIcon from "../icons/TrashIcon"
 

@@ -1,16 +1,9 @@
-import { createClient } from "@/lib/supabase/server"
 import styles from './page.module.css'
 import Link from "next/link"
+import { getProfile } from '@/lib/queries/profile'
 
 export default async function Profile() {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user!.id)
-        .single()
+    const { profile, user } = await getProfile()
 
     return (
         <div className={styles.container}>

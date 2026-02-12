@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import styles from './AddMemberForm.module.css'
 import { useState } from 'react'
-import { addMembersToGroup } from '@/app/actions'
+import { addMembersToGroup } from '@/lib/actions/groups'
 
 type Person = {
     id: string

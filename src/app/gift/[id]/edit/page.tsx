@@ -1,7 +1,7 @@
-import { updateGift } from "@/app/actions"
+import { updateGift } from "@/lib/actions/gifts"
 import GiftForm from "@/components/forms/GiftForm/GiftForm"
-import { createClient } from "@/lib/supabase/server"
 import styles from './page.module.css'
+import { getGift } from "@/lib/queries/gifts"
 
 export default async function EditGift({
     params
@@ -9,23 +9,7 @@ export default async function EditGift({
     params: Promise<{ id: string }>
 }) {
     const { id } = await params
-    const supabase = await createClient()
-
-    const { data: gift } = await supabase
-        .from('gifts')
-        .select(`
-            *,
-            people (
-                name,
-                id
-            )
-        `)
-        .eq('id', id)
-        .single()
-
-    if (!gift) {
-        return <div>Gift not found</div>
-    }
+    const { gift } = await getGift(id)
 
     async function handleSubmit(data: { name: string, occasion: string, price: number, status: string}) {
         'use server'

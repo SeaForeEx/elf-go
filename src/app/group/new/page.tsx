@@ -1,4 +1,4 @@
-import { createGroup } from '@/app/actions';
+import { createGroup } from '@/lib/actions/groups';
 import styles from './page.module.css';
 import GroupForm from '@/components/forms/GroupForm/GroupForm';
 
