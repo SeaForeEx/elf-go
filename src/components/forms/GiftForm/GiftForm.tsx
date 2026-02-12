@@ -3,17 +3,7 @@
 import { useState } from "react"
 import styles from './GiftForm.module.css'
 import { useRouter } from "next/navigation"
-
-type GiftFormProps = {
-    personId: string
-    initialData?: {
-        name: string
-        occasion: string
-        price: number | null
-        status: string | null
-    }
-    onSubmit: (data: { name: string; occasion: string; price: number, status: string }) => Promise<void>
-}
+import { GiftFormProps } from "@/lib/types/types"
 
 export default function GiftForm({
     personId,

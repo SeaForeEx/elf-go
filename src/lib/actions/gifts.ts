@@ -3,10 +3,11 @@
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation";
+import { GiftFormData } from "../types/types";
 
 export async function createGift(
     personId: string,
-    data: { name: string; occasion: string; price: number; status: string }
+    data: GiftFormData
 ) { 
     const supabase = await createClient()
 
@@ -32,7 +33,7 @@ export async function createGift(
 
 export async function updateGift(
     giftId: string,
-    data: { name: string; occasion: string; price: number; status: string }
+    data: GiftFormData
 ) {
     const supabase = await createClient()
 

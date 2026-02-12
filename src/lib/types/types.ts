@@ -64,3 +64,15 @@ export type ProfileFormData = {
     name: string
     budget: number
 }
+
+// Component Props types
+export type GiftFormProps = {
+    personId: string
+    initialData?: {
+        name: string
+        occasion: string
+        price: number | null
+        status: string | null
+    }
+    onSubmit: (data: GiftFormData) => Promise<void>
+}
