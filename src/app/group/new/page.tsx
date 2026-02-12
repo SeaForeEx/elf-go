@@ -1,9 +1,10 @@
 import { createGroup } from '@/lib/actions/groups';
 import styles from './page.module.css';
 import GroupForm from '@/components/forms/GroupForm/GroupForm';
+import { GroupFormData } from '@/lib/types/types';
 
 export default function NewGroup() {
-    async function handleSubmit(data: { name: string }) {
+    async function handleSubmit(data: GroupFormData) {
         'use server'
         await createGroup(data)
     }

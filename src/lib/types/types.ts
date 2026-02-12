@@ -1,5 +1,4 @@
 // Database types matching your Supabase schema
-
 export type Person = {
     id: string
     name: string
@@ -24,6 +23,11 @@ export type Group = {
     user_id: string
 }
 
+export type Member = {
+    id: string
+    name: string
+}
+
 export type Profile = {
     id: string
     name: string
@@ -38,7 +42,7 @@ export type PersonWithGifts = Person & {
 }
 
 export type GroupWithMembers = Group & {
-    people: Person[]
+    people: Member[]
 }
 
 // Form data types (what you pass to actions)
@@ -75,4 +79,17 @@ export type GiftFormProps = {
         status: string | null
     }
     onSubmit: (data: GiftFormData) => Promise<void>
+}
+
+export type AddMemberFormProps = {
+    groupId?: string
+    people: Member[]
+}
+
+export type GroupFormProps = {
+    groupId?: string
+    initialData?: {
+        name: string
+    }
+    onSubmit: (data: GroupFormData) => Promise<void>
 }

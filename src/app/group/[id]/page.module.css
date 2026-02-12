@@ -58,10 +58,6 @@
     transition: color 0.2s;
 }
   
-.groupLink:hover {
-    color: #16a34a;
-}
-  
 .noGroups {
     text-align: center;
     color: #6b7280;

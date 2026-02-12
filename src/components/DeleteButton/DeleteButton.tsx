@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { deleteGift } from "@/lib/actions/gifts"
 import { deleteGroup } from "@/lib/actions/groups"
 import { deletePerson } from "@/lib/actions/people"
@@ -22,6 +23,7 @@ export default function DeleteButton({
     personId,
     groupId
 }: DeleteButtonProps) {
+    const router = useRouter()
     const [isDeleting, setIsDeleting] = useState(false)
     const [showTooltip, setShowTooltip] = useState(false)
 
@@ -49,12 +51,15 @@ export default function DeleteButton({
             switch (itemType) {
                 case 'person':
                     await deletePerson(personId!)
+                    router.push('/')
                     break
                 case 'gift':
                     await deleteGift(giftId!, personId!)
+                    router.push(`/person/${personId}`)
                     break
                 case 'group':
                     await deleteGroup(groupId!)
+                    router.push('/')
                     break
             }
         } catch (error) {

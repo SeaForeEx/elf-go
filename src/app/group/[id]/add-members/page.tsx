@@ -1,23 +1,12 @@
-import { createClient } from "@/lib/supabase/server"
 import styles from './page.module.css'
 import AddMemberForm from "@/components/forms/AddMemberForm/AddMemberForm"
+import { getGroup, getUngroupedPeople } from "@/lib/queries/groups"
 
 
 export default async function AddMembers({ params }: { params: Promise<{ id: string }>}) {
     const { id } = await params
-    const supabase = await createClient()
-
-    const { data: group, error } = await supabase
-        .from('groups')
-        .select('*')
-        .eq('id', id)
-        .single()
-
-    const { data: people } = await supabase
-        .from('people')
-        .select('id, name')
-        .is('group_id', null)
-        .order('name')
+    const { group } = await getGroup(id)
+    const { people } = await getUngroupedPeople()
 
     return (
         <div className={styles.container}>

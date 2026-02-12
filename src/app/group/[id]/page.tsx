@@ -1,27 +1,14 @@
-import { createClient } from '@/lib/supabase/server'
 import styles from './page.module.css'
 import EditButton from '@/components/EditButton/EditButton'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import Link from 'next/link'
 import UserPlusButton from '@/components/UserPlusButton/UserPlusButton'
 import { Person } from '@/lib/types/types'
+import { getMembers } from '@/lib/queries/groups'
 
 export default async function Group({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
-    const supabase = await createClient()
-
-    const { data: group, error } = await supabase
-        .from('groups')
-        .select(`
-            *,
-            people!group_id (*)
-        `)
-        .eq('id', id)
-        .single()
-
-    if (error || !group) {
-        return <div>Group not found</div>
-    }
+    const { group } = await getMembers(id)
 
     return (
         <div className={styles.container}>

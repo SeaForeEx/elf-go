@@ -71,5 +71,5 @@ export async function deletePerson(personId: string) {
     }
 
     revalidatePath('/')
-    redirect('/')
+    return { success: true }
 }
