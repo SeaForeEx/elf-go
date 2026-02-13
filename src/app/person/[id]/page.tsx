@@ -1,28 +1,20 @@
-import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import styles from './page.module.css'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import EditButton from '@/components/EditButton/EditButton'
 import CreateButton from '@/components/CreateButton/CreateButton'
+import { Gift, PersonWithGiftsAndGroup } from '@/lib/types/types'
+import { getPersonAndGifts } from '@/lib/queries/people'
 
 export default async function Person({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
-    const supabase = await createClient()
+    const result = await getPersonAndGifts(id)
     
-    const { data: person, error } = await supabase
-        .from('people')
-        .select(`
-            *,
-            gifts (*),
-            groups (id, name)
-        `)
-        .eq('id', id)
-        .single()
-
-    
-    if (error || !person) {
-        return <div>Person not found</div>
+    if (!result.success || !result.person) {
+        return <div className={styles.container}>Person not found</div>
     }
+    
+    const person: PersonWithGiftsAndGroup = result.person
 
     return (
         <div className={styles.container}>
@@ -46,9 +38,9 @@ export default async function Person({ params }: { params: Promise<{ id: string 
                 {person.address || 'No address listed'}
                 <br /><br />
                 Group: {' '}
-                {person.groups?.name ? (
-                    <Link href={`/group/${person.groups.id}`} className={styles.groupLink}>
-                        {person.groups.name}
+                {person.group?.name ? (
+                    <Link href={`/group/${person.group.id}`} className={styles.groupLink}>
+                        {person.group.name}
                     </Link>
                 ) : (
                     'Not in a group'
@@ -56,7 +48,7 @@ export default async function Person({ params }: { params: Promise<{ id: string 
             </h3>
 
             <h2 className={styles.subtitle}>
-                {person.name}'s Gifts
+                {person.name}&apos;s Gifts
                 <CreateButton 
                     itemType={'gift'}
                     personId={person.id} 
@@ -80,7 +72,7 @@ export default async function Person({ params }: { params: Promise<{ id: string 
 
             {person.gifts && person.gifts.length > 0 ? (
                 <ul className={styles.giftList}>
-                    {person.gifts?.map((gift: any) => (
+                    {person.gifts?.map((gift: Gift) => (
                         <li 
                             key={gift.id} 
                             className={`${styles.giftListItem} ${

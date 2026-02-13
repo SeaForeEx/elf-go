@@ -1,7 +1,9 @@
 import { updatePerson } from "@/lib/actions/people"
+import { getPerson } from "@/lib/queries/people"
+import { getGroups } from "@/lib/queries/groups"
 import PersonForm from "@/components/forms/PersonForm/PersonForm"
-import { createClient } from "@/lib/supabase/server"
 import styles from './page.module.css'
+import { PersonFormData } from "@/lib/types/types"
 
 export default async function EditPerson({
     params
@@ -9,24 +11,10 @@ export default async function EditPerson({
     params: Promise<{ id: string }>
 }) {
     const { id } = await params
-    const supabase = await createClient()
+    const { person } = await getPerson(id)
+    const { groups } = await getGroups()
 
-    const { data: person } = await supabase 
-        .from('people')
-        .select('*')
-        .eq('id', id)
-        .single()
-
-    const { data: groups } = await supabase
-        .from('groups')
-        .select('id, name')
-        .order('name')
-
-    if (!person) {
-        return <div>Person not found</div>
-    }
-
-    async function handleSubmit(data: { name: string, hobbies: string; address: string | null; groupId: string | null }) {
+    async function handleSubmit(data: PersonFormData) {
         'use server'
         await updatePerson(id, data)
     }

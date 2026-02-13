@@ -2,6 +2,7 @@ import { updateGift } from "@/lib/actions/gifts"
 import GiftForm from "@/components/forms/GiftForm/GiftForm"
 import styles from './page.module.css'
 import { getGift } from "@/lib/queries/gifts"
+import { GiftFormData } from "@/lib/types/types"
 
 export default async function EditGift({
     params
@@ -11,7 +12,7 @@ export default async function EditGift({
     const { id } = await params
     const { gift } = await getGift(id)
 
-    async function handleSubmit(data: { name: string, occasion: string, price: number, status: string}) {
+    async function handleSubmit(data: GiftFormData) {
         'use server'
         await updateGift(id, data)
     }
