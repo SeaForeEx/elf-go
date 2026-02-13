@@ -4,18 +4,7 @@ import { useState } from "react"
 import styles from './PersonForm.module.css'
 import { useRouter } from "next/navigation"
 import AddressAutocomplete from "../AddressAutocomplete/AddressAutocomplete"
-
-type PersonFormProps = {
-    personId?: string
-    initialData?: {
-        name: string
-        hobbies: string | null
-        address: string | null
-        group_id: string | null
-    }
-    groups?: Array<{ id: string; name: string }>
-    onSubmit: (data: { name: string; hobbies: string; address: string | null; groupId: string | null }) => Promise<void>
-}
+import { PersonFormProps } from "@/lib/types/types"
 
 export default function PersonForm({
     personId,

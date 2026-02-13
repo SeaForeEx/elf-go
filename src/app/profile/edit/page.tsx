@@ -2,6 +2,7 @@ import { updateProfile } from "@/lib/actions/profile";
 import { createClient } from "@/lib/supabase/server";
 import styles from './page.module.css'
 import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
+import { ProfileFormData } from "@/lib/types/types";
 
 export default async function EditProfile() {
     const supabase = await createClient()
@@ -13,7 +14,7 @@ export default async function EditProfile() {
         .eq('id', user!.id)
         .single()
 
-    async function handleSubmit(data: { name: string; budget: number }) {
+    async function handleSubmit(data: ProfileFormData) {
         'use server'
         await updateProfile(data, '/profile')
     }

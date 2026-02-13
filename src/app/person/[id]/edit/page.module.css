@@ -1,6 +1,5 @@
 .container {
     min-height: 100vh;
-    background: linear-gradient(to bottom right, #f0fdf4, #fef2f2);
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -10,7 +9,7 @@
 .title {
     font-size: 2rem;
     font-weight: bold;
-    color: #16a34a;
+    color: var(--foreground);
     margin-bottom: 2rem;
     text-align: center;
 }

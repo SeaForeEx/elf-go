@@ -37,8 +37,9 @@ export type Profile = {
 }
 
 // Relation types (with joins)
-export type PersonWithGifts = Person & {
+export type PersonWithGiftsAndGroup = Person & {
     gifts: Gift[]
+    group: Group | null
 }
 
 export type GroupWithMembers = Group & {
@@ -92,4 +93,16 @@ export type GroupFormProps = {
         name: string
     }
     onSubmit: (data: GroupFormData) => Promise<void>
+}
+
+export type PersonFormProps = {
+    personId?: string
+    initialData?: {
+        name: string
+        hobbies: string | null
+        address: string | null
+        group_id: string | null
+    }
+    groups?: Array<{ id: string; name: string }>
+    onSubmit: (data: PersonFormData) => Promise<void>
 }
