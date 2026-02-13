@@ -3,14 +3,7 @@
 import { useState } from "react"
 import styles from './ProfileForm.module.css'
 import { useRouter } from "next/navigation"
-
-type ProfileFormProps = {
-    initialData?: {
-        name: string | null
-        budget: number | null
-    }
-    onSubmit: (data: { name: string; budget: number}) => Promise<void>
-}
+import { ProfileFormProps } from "@/lib/types/types"
 
 export default function ProfileForm({
     initialData,

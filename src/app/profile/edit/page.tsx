@@ -1,18 +1,11 @@
 import { updateProfile } from "@/lib/actions/profile";
-import { createClient } from "@/lib/supabase/server";
 import styles from './page.module.css'
 import ProfileForm from "@/components/forms/ProfileForm/ProfileForm";
 import { ProfileFormData } from "@/lib/types/types";
+import { getProfile } from "@/lib/queries/profile";
 
 export default async function EditProfile() {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user!.id)
-        .single()
+    const { profile } = await getProfile()
 
     async function handleSubmit(data: ProfileFormData) {
         'use server'

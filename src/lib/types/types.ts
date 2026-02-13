@@ -106,3 +106,11 @@ export type PersonFormProps = {
     groups?: Array<{ id: string; name: string }>
     onSubmit: (data: PersonFormData) => Promise<void>
 }
+
+export type ProfileFormProps = {
+    initialData?: {
+        name: string | null
+        budget: number | null
+    }
+    onSubmit: (data: ProfileFormData) => Promise<void>
+}
