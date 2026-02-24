@@ -7,21 +7,15 @@ import { deleteGroup } from "@/lib/actions/groups"
 import { deletePerson } from "@/lib/actions/people"
 import styles from './DeleteButton.module.css'
 import TrashIcon from "../icons/TrashIcon"
-
-type DeleteButtonProps = {
-    itemName: string
-    itemType: 'person' | 'gift' | 'group'
-    giftId?: string
-    personId?: string
-    groupId?: string
-}
+import { DeleteButtonProps } from "@/lib/types/types"
+import { deleteProfile } from "@/lib/actions/profile"
 
 export default function DeleteButton({
     itemName,
     itemType,
     giftId,
     personId,
-    groupId
+    groupId,
 }: DeleteButtonProps) {
     const router = useRouter()
     const [isDeleting, setIsDeleting] = useState(false)
@@ -39,6 +33,10 @@ export default function DeleteButton({
                 break
             case 'group':
                 confirmMessage = `Are you sure you want to delete "${itemName}"? (Note: all the people in the group will NOT be deleted.)`
+                break
+            case 'profile':
+                confirmMessage = `Are you sure you want to delete your profile? This will permanently delete all your data including people, gifts, and budgets. This action cannot be undone.`
+                break
         }
 
         if(!confirm(confirmMessage)) {
@@ -59,6 +57,10 @@ export default function DeleteButton({
                     break
                 case 'group':
                     await deleteGroup(groupId!)
+                    router.push('/')
+                    break
+                case 'profile':
+                    await deleteProfile()
                     router.push('/')
                     break
             }

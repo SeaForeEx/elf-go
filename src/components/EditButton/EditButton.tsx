@@ -4,19 +4,13 @@ import { useRouter } from 'next/navigation'
 import styles from './EditButton.module.css'
 import PencilIcon from '../icons/PencilIcon'
 import { useState } from 'react'
-
-type EditButtonProps = {
-    itemType: 'person' | 'gift' | 'group'
-    personId?: string
-    giftId?: string
-    groupId?: string
-}
+import { EditButtonProps } from '@/lib/types/types'
 
 export default function EditButton({ 
     itemType,
     personId,
     giftId,
-    groupId 
+    groupId,
 }: EditButtonProps) {
     const router = useRouter()
     const [showTooltip, setShowTooltip] = useState(false)
@@ -31,6 +25,9 @@ export default function EditButton({
                 break
             case 'group':
                 router.push(`/group/${groupId}/edit`)
+                break
+            case 'profile':
+                router.push(`/profile/edit`)
                 break
             default: 
                 router.push('/')

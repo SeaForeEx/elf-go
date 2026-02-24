@@ -4,7 +4,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to bottom right, #f0fdf4, #fef2f2);
     overflow: hidden;
 }
   

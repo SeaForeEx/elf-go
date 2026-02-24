@@ -5,16 +5,20 @@ import styles from './SignUpForm.module.css'
 import { useRouter } from "next/navigation";
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
+import NextOccasion from '@/components/NextOccasion/NextOccasion';
 
 export default function SignUpForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
-    const [success, setSuccess] = useState(false)
+    const [, setSuccess] = useState(false)
     const router = useRouter()
     const supabase = createClient()
+    const nextOccasion = NextOccasion()
 
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -52,7 +56,7 @@ export default function SignUpForm() {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}> Join ELF GO</h1>
+            <h1 className={styles.title}> Join {nextOccasion.emoji} ELF GO!</h1>
 
             <form onSubmit={handleSignUp} className={styles.form}>
                 {error && (

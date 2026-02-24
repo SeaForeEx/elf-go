@@ -4,11 +4,7 @@ import { useState } from 'react'
 import PlusIcon from '../icons/PlusIcon'
 import styles from './CreateButton.module.css'
 import { useRouter } from 'next/navigation'
-
-type CreateButtonProps = {
-    itemType: 'person' | 'gift' | 'group'
-    personId?: string 
-}
+import { CreateButtonProps } from '@/lib/types/types'
 
 export default function CreateButton({ 
     itemType,
