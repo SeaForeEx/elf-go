@@ -11,7 +11,7 @@
 .title {
     font-size: 2rem;
     font-weight: bold;
-    color: #16a34a;
+    color: var(--foreground);
     margin-bottom: 0.5rem;
     text-align: center;
 }

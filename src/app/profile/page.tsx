@@ -1,6 +1,7 @@
 import styles from './page.module.css'
-import Link from "next/link"
 import { getProfile } from '@/lib/queries/profile'
+import DeleteButton from '@/components/DeleteButton/DeleteButton'
+import EditButton from '@/components/EditButton/EditButton'
 
 export default async function Profile() {
     const { profile, user } = await getProfile()
@@ -20,10 +21,16 @@ export default async function Profile() {
                         ${profile?.budget ? Number(profile.budget).toFixed(2) : '0.00'}
                     </span>
                 </div>
-
-                <Link href="/profile/edit" className={styles.editButton}>
-                    Edit Profile
-                </Link>
+                <div className={styles.buttonContainer}>
+                    <EditButton 
+                        itemType='profile'
+                        profileId={profile.id} 
+                    />
+                    <DeleteButton 
+                        itemType="profile"
+                        itemName="Delete Your Profile"
+                    />
+                </div>
             </div>
         </div>
     )

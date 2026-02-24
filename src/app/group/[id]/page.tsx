@@ -3,12 +3,18 @@ import EditButton from '@/components/EditButton/EditButton'
 import DeleteButton from '@/components/DeleteButton/DeleteButton'
 import Link from 'next/link'
 import UserPlusButton from '@/components/UserPlusButton/UserPlusButton'
-import { Person } from '@/lib/types/types'
+import { GroupWithMembers, Member } from '@/lib/types/types'
 import { getMembers } from '@/lib/queries/groups'
 
 export default async function Group({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
-    const { group } = await getMembers(id)
+    const result = await getMembers(id)
+
+    if (!result.success || !result.group) {
+        return <div className={styles.container}>Group not found</div>
+    }
+    
+    const group: GroupWithMembers = result.group
 
     return (
         <div className={styles.container}>
@@ -30,7 +36,7 @@ export default async function Group({ params }: { params: Promise<{ id: string }
 
             {group.people && group.people.length > 0 ? (
                 <ul className={styles.groupList}>
-                    {group.people?.map((person: Person) => (
+                    {group.people?.map((person: Member) => (
                         <li 
                             key={person.id} 
                             className={styles.groupListItem}

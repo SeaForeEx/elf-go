@@ -14,6 +14,8 @@ export default async function Home() {
     const { profile } = await getProfile()
     const { groups } = await getGroups()
 
+    console.log('gifts: ', gifts)
+
     const hasBudget = profile?.budget != null && profile?.budget > 0
     let remainingActual = 0
     let remainingPlanned = 0
@@ -99,7 +101,8 @@ export default async function Home() {
                             </Link>
                             <EditButton 
                                 itemType='person'
-                                personId={person.id} />
+                                personId={person.id} 
+                            />
                             <DeleteButton 
                                 itemName={person.name}
                                 itemType='person'

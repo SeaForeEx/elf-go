@@ -14,7 +14,7 @@ export default async function Footer() {
     return (
         <footer className={styles.footer}>
         <p className={styles.countdown}>
-            {nextOccasion.daysUntil} days until {nextOccasion.name}! {nextOccasion.emoji}
+            {nextOccasion.daysUntil} {nextOccasion.daysUntil === 1 ? 'day' : 'days'} until {nextOccasion.name}! {nextOccasion.emoji}
         </p>
         </footer>
     )

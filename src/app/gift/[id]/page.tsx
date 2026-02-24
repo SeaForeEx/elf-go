@@ -24,6 +24,7 @@ export default async function Gift({ params }: { params: Promise<{ id: string }>
                     itemName={gift.name}
                     itemType='gift'
                     giftId={gift.id}
+                    personId={gift.people.id}
                 />
             </h2>
             <h3>

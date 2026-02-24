@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from './LoginForm.module.css'
 import Link from "next/link";
+import NextOccasion from "@/components/NextOccasion/NextOccasion";
 
 export default function LoginForm () {
     const [email, setEmail] = useState('')
@@ -13,6 +14,7 @@ export default function LoginForm () {
     const [loading, setLoading] = useState(false)
     const router = useRouter()
     const supabase = createClient()
+    const nextOccasion = NextOccasion()
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -35,11 +37,11 @@ export default function LoginForm () {
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>🎄 ELF GO!</h1>
+            <h1 className={styles.title}>{nextOccasion.emoji} ELF GO!</h1>
             <p className={styles.description}>
                 Track your gifts, manage your budget, and make holiday shopping stress-free!            </p>
             <p className={styles.tagline}>
-                It's gift giving, simplified.
+                It&apos;s gift giving, simplified.
             </p>
 
             <form onSubmit={handleLogin} className={styles.form}>
@@ -89,7 +91,7 @@ export default function LoginForm () {
             </form>
 
             <p className={styles.footer}>
-                Don't have an account?{' '}
+                Don&apos;t have an account?{' '}
                 <Link href="/signup" className={styles.link}>
                     Sign up
                 </Link>
